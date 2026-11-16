@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-container-highest":"#d3e4fe","secondary-fixed":"#ffdcc3","on-primary":"#ffffff","surface-container-high":"#dce9ff","on-primary-fixed-variant":"#3f465c","surface-container-lowest":"#ffffff","tertiary-fixed-dim":"#68dba9","on-tertiary-container":"#069669","on-tertiary":"#ffffff","on-secondary":"#ffffff","on-primary-container":"#7c839b","primary":"#000000","surface-tint":"#565e74","surface-dim":"#cbdbf5","tertiary-container":"#002114","on-surface-variant":"#45464d","surface":"#f8f9ff","inverse-on-surface":"#eaf1ff","inverse-primary":"#bec6e0","primary-container":"#131b2e","on-secondary-container":"#663500","secondary-fixed-dim":"#ffb77d","on-error":"#ffffff","tertiary":"#000000","on-secondary-fixed":"#2f1500","outline-variant":"#c6c6cd","tertiary-fixed":"#85f8c4","surface-variant":"#d3e4fe","on-primary-fixed":"#131b2e","on-error-container":"#93000a","on-secondary-fixed-variant":"#6e3900","surface-bright":"#f8f9ff","background":"#f8f9ff","primary-fixed":"#dae2fd","on-background":"#0b1c30","on-tertiary-fixed-variant":"#005137","secondary":"#904d00","secondary-container":"#fe932c","outline":"#76777d","surface-container":"#e5eeff","surface-container-low":"#eff4ff","on-surface":"#0b1c30","on-tertiary-fixed":"#002114","error-container":"#ffdad6","error":"#ba1a1a","primary-fixed-dim":"#bec6e0","inverse-surface":"#213145"},borderRadius:{DEFAULT:"0.125rem",lg:"0.25rem",xl:"0.5rem",full:"0.75rem"},spacing:{"gutter-desktop":"1.5rem",gutter:"1rem",margin:"1rem","space-xs":"0.25rem","space-md":"0.75rem","margin-desktop":"2rem","space-lg":"1.25rem","space-sm":"0.5rem","space-xl":"2rem"},fontFamily:{"headline-lg":["Plus Jakarta Sans"],"label-xs":["JetBrains Mono"],"body-md":["Inter"],"data-cell":["JetBrains Mono"],"title-sm":["Inter"],"headline-md":["Plus Jakarta Sans"],"data-metric":["JetBrains Mono"],"headline-lg-mobile":["Plus Jakarta Sans"],"label-md":["Inter"],"body-sm":["Inter"],display:["Plus Jakarta Sans"]},fontSize:{"headline-lg":["28px",{lineHeight:"36px",letterSpacing:"-0.02em",fontWeight:"700"}],"label-xs":["11px",{lineHeight:"14px",fontWeight:"500"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"data-cell":["13px",{lineHeight:"18px",fontWeight:"500"}],"title-sm":["16px",{lineHeight:"24px",letterSpacing:"-0.005em",fontWeight:"600"}],"headline-md":["20px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}],"data-metric":["20px",{lineHeight:"24px",letterSpacing:"-0.02em",fontWeight:"600"}],"headline-lg-mobile":["22px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"700"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"600"}],"body-sm":["13px",{lineHeight:"18px",fontWeight:"400"}],display:["36px",{lineHeight:"44px",letterSpacing:"-0.02em",fontWeight:"700"}]}}}}</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-72 bg-primary-container text-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center justify-between bg-primary-container"><div class="flex items-center gap-space-md"><img alt="BakeCost Scale Icon" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrBTkY7jmIfityYuKlCR0LNWVuuxRbkmkyBxZVzlJWFPhXTU_C8kfOA-SqlxogvPPFyiCV-36lMV4GxbU06_z6frm1iZatG63k6sKkmZB3ZC9tzQHfZF2r8q9eSUGiuWJ7Pl81c5zjyNuDhGE7aiG7rG2ZHV7X5-qWfVmABIa8_b0pDkkQpCiuLK24yEWyuGzId4GrvxpyP_HBk6MnMPmdsoV2QLh_BrsJxjHNt-7TuJjw"/><div class="flex flex-col"><span class="font-title-sm text-title-sm text-surface-container-lowest leading-none tracking-tight">BakeCost Ops</span><span class="font-label-xs text-label-xs text-on-primary-container tracking-wider uppercase mt-space-xs">Culinary ERP</span></div></div></div><div class="px-space-md py-space-sm"><div class="inline-flex items-center gap-space-xs px-space-sm py-space-xs rounded bg-surface-container-highest/20 text-surface-container-high font-label-xs text-label-xs"><span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span><span>Fase 1: Production Costing</span></div></div><div class="px-space-md py-space-xs"><div class="font-label-xs text-label-xs uppercase tracking-wider text-on-primary-container px-space-sm mb-space-xs font-semibold">Modul Operasional</div><nav class="space-y-space-xs" data-active-classes="bg-surface-container-highest/15 text-surface-container-lowest font-semibold border-l-2 border-secondary-container"><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-surface-container-high hover:bg-surface-container-highest/10 hover:text-surface-container-lowest transition-all" data-path="dashboard-overview" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="font-body-sm text-body-sm">Dashboard &amp; Overview</span></a><a aria-current="page" class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg transition-all bg-surface-container-highest/15 text-surface-container-lowest font-semibold border-l-2 border-secondary-container" data-path="bahan-baku-inventory" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span class="font-body-sm text-body-sm">Bahan Baku &amp; Inventory</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-surface-container-high hover:bg-surface-container-highest/10 hover:text-surface-container-lowest transition-all" data-path="recipe-studio-scaler" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-body-sm text-body-sm">Recipe Studio &amp; Scaler</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-surface-container-high hover:bg-surface-container-highest/10 hover:text-surface-container-lowest transition-all" data-path="hpp-engine-margin-simulator" href="#"><span class="material-symbols-outlined text-[20px]">calculate</span><span class="font-body-sm text-body-sm">HPP Engine &amp; Margin Simulator</span></a></nav></div><div class="px-space-md py-space-xs mt-space-md"><div class="font-label-xs text-label-xs uppercase tracking-wider text-on-primary-container px-space-sm mb-space-xs font-semibold">Tata Kelola &amp; Panduan</div><nav class="space-y-space-xs" data-active-classes="bg-surface-container-highest/15 text-surface-container-lowest font-semibold border-l-2 border-secondary-container"><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-surface-container-high hover:bg-surface-container-highest/10 hover:text-surface-container-lowest transition-all" data-path="audit-log-perubahan" href="#"><span class="material-symbols-outlined text-[20px]">history</span><span class="font-body-sm text-body-sm">Audit Log Perubahan</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-surface-container-high hover:bg-surface-container-highest/10 hover:text-surface-container-lowest transition-all" data-path="panduan-standar-biaya-fb" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-body-sm text-body-sm">Panduan Standar Biaya F&amp;B</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-surface-container-high hover:bg-surface-container-highest/10 hover:text-surface-container-lowest transition-all" data-path="pengaturan" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-body-sm text-body-sm">Pengaturan</span></a></nav></div></div><div class="p-space-md bg-primary-container/80"><div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-highest/10"><div class="flex items-center gap-space-sm"><div class="w-2 h-2 rounded-full bg-tertiary-fixed"></div><div class="flex flex-col"><span class="font-label-xs text-label-xs text-surface-container-lowest font-semibold">Database Sinkron</span><span class="font-label-xs text-label-xs text-on-primary-container">v1.4.2 Production</span></div></div><span class="material-symbols-outlined text-[18px] text-on-primary-container">cloud_done</span></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-lg flex-1 max-w-xl"><div class="relative w-full"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span><input class="w-full pl-10 pr-space-md py-space-xs bg-surface-container-low text-on-surface placeholder:text-on-surface-variant font-body-sm text-body-sm rounded-lg focus:outline-none focus:bg-surface-container-lowest focus:ring-1 focus:ring-secondary transition-all" placeholder="Cari formula resep, SKU bahan baku, atau kode batch..." type="text"/></div></div><div class="flex items-center gap-space-md"><div class="inline-flex items-center gap-space-xs px-space-md py-space-xs bg-surface-container-low rounded-lg text-on-surface"><span class="material-symbols-outlined text-[18px] text-secondary">payments</span><span class="font-label-xs text-label-xs uppercase font-semibold">Mata Uang:</span><span class="font-data-cell text-data-cell font-bold text-on-surface">IDR (Rp)</span></div><div class="h-6 w-px bg-surface-container-high"></div><button class="p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors relative" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full"></span></button><div class="flex items-center gap-space-md pl-space-xs"><div class="flex flex-col text-right"><span class="font-title-sm text-title-sm text-on-surface leading-tight font-semibold">Chef Ayu</span><span class="font-label-xs text-label-xs text-on-surface-variant font-medium">Head Baker &amp; R&amp;D</span></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-[0_1px_4px_rgba(0,0,0,0.1)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdg8ggiA8yrSANXWUsHC4bPs-trULzLlFynizeOD3z8q1m-xvX3i_VYS-Pg6XjPBeOYKvyaviiEVOemH5ZZNuUpKQ2mw7qv6znyHoIv_hkmFueV3Vz3UhdQUTM4vI0aFyHpn2o_avTUCmvsIf5vMhHJr8-ZSd5nz8cqciOUe-PYnJDtOa6EAt4PeNW61mpnk7jyg0ElXYDsOGw-y0PeNjCJzTyjCR6F0zO5if66JSq"/></div></div></header><main class="w-full pt-16 bg-surface min-h-screen px-space-xl py-space-lg"><div class="flex flex-col w-full space-y-space-lg">
+<!-- Top Command & Action Bar -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-secondary font-semibold">Modul Master Data</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-xs text-label-xs text-on-surface-variant font-data-cell">SKU-INV-MTRX v2.4</span>
+</div>
+<h1 class="font-headline-md text-headline-md text-on-surface tracking-tight mt-0.5">Katalog Bahan Baku &amp; Manajemen Harga Beli</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+        Kelola harga pembelian multi-satuan, normalisasi harga base unit, konversi antar-dimensi, dan riwayat harga append-only.
+      </p>
+</div>
+<!-- Global Operations Group -->
+<div class="flex items-center gap-space-sm flex-wrap">
+<button class="inline-flex items-center gap-space-xs px-space-md py-2 rounded bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-colors shadow-sm font-label-md text-label-md" type="button">
+<span class="material-symbols-outlined text-[18px]">history</span>
+<span>Audit Riwayat Harga</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-md py-2 rounded bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-colors shadow-sm font-label-md text-label-md" type="button">
+<span class="material-symbols-outlined text-[18px]">upload_file</span>
+<span>Import CSV</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-md py-2 rounded bg-secondary text-on-secondary hover:bg-secondary-fixed-variant transition-colors shadow-sm font-label-md text-label-md" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>+ Bahan Baru</span>
+</button>
+</div>
+</div>
+<!-- Operational Stat Cards / Metrics Pulse -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-space-md">
+<div class="p-space-md rounded bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-xs text-label-xs uppercase tracking-wider">Total SKU Terdaftar</span>
+<span class="material-symbols-outlined text-[18px] text-primary">inventory</span>
+</div>
+<div class="mt-space-sm flex items-baseline justify-between">
+<span class="font-data-metric text-data-metric text-on-surface">148 <span class="font-body-sm text-body-sm text-on-surface-variant font-normal">item</span></span>
+<span class="font-label-xs text-label-xs text-on-tertiary-container bg-surface-container-highest px-1.5 py-0.5 rounded font-semibold">100% Terpetakan</span>
+</div>
+</div>
+<div class="p-space-md rounded bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-xs text-label-xs uppercase tracking-wider">Volatilitas Harga (30 Hari)</span>
+<span class="material-symbols-outlined text-[18px] text-secondary">trending_up</span>
+</div>
+<div class="mt-space-sm flex items-baseline justify-between">
+<span class="font-data-metric text-data-metric text-secondary">+3.82%</span>
+<span class="font-label-xs text-label-xs text-error bg-error-container/40 px-1.5 py-0.5 rounded font-semibold">12 SKU Naik</span>
+</div>
+</div>
+<div class="p-space-md rounded bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-xs text-label-xs uppercase tracking-wider">Aturan Non-Linear</span>
+<span class="material-symbols-outlined text-[18px] text-secondary">science</span>
+</div>
+<div class="mt-space-sm flex items-baseline justify-between">
+<span class="font-data-metric text-data-metric text-on-surface">6 <span class="font-body-sm text-body-sm text-on-surface-variant font-normal">SKU aktif</span></span>
+<span class="font-label-xs text-label-xs text-on-surface-variant bg-surface-container-low px-1.5 py-0.5 rounded">Ragi &amp; Enzyme</span>
+</div>
+</div>
+<div class="p-space-md rounded bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-xs text-label-xs uppercase tracking-wider">Log Audit Terakhir</span>
+<span class="material-symbols-outlined text-[18px] text-primary">verified_user</span>
+</div>
+<div class="mt-space-sm flex items-baseline justify-between">
+<span class="font-data-cell text-data-cell text-on-surface truncate">24 Okt 2024, 08:32</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Chef Ayu</span>
+</div>
+</div>
+</div>
+<!-- Filter & Fast Sieve Bar -->
+<div class="p-space-md rounded bg-surface-container-lowest shadow-sm space-y-space-sm">
+<div class="flex flex-col md:flex-row items-center gap-space-sm">
+<div class="relative flex-1 w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="w-full pl-9 pr-space-md py-1.5 bg-surface-container-low text-on-surface placeholder:text-on-surface-variant font-body-sm text-body-sm rounded focus:outline-none focus:bg-surface-container-lowest focus:ring-1 focus:ring-secondary transition-all" id="searchInput" placeholder="Cari bahan, kode SKU, atau kategori (mis: Terigu, Cakra, Fermipan)..." type="text"/>
+</div>
+<div class="flex items-center gap-space-xs w-full md:w-auto">
+<select class="w-full md:w-auto px-space-md py-1.5 bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded focus:outline-none focus:ring-1 focus:ring-secondary">
+<option value="">Satuan Pembelian: Semua</option>
+<option value="kg">Kilogram (kg)</option>
+<option value="sak">Sak (25 - 50 kg)</option>
+<option value="blok">Blok / Carton</option>
+<option value="liter">Liter / Pail</option>
+<option value="butir">Butir / Peti</option>
+<option value="bungkus">Bungkus / Pack</option>
+</select>
+<button class="p-1.5 rounded bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-colors" title="Reset Filter" type="button">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+</button>
+</div>
+</div>
+<!-- Category Filter Ribbon -->
+<div class="flex items-center gap-space-xs overflow-x-auto pt-space-xs scrollbar-none">
+<button class="px-space-md py-1 rounded-full bg-primary-container text-surface-container-lowest font-label-xs text-label-xs whitespace-nowrap shadow-sm">
+        Semua Kategori (148)
+      </button>
+<button class="px-space-md py-1 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high font-label-xs text-label-xs whitespace-nowrap transition-colors">
+        Tepung &amp; Pati (24)
+      </button>
+<button class="px-space-md py-1 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high font-label-xs text-label-xs whitespace-nowrap transition-colors">
+        Dairy &amp; Telur (19)
+      </button>
+<button class="px-space-md py-1 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high font-label-xs text-label-xs whitespace-nowrap transition-colors">
+        Ragi &amp; Pengembang (8)
+      </button>
+<button class="px-space-md py-1 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high font-label-xs text-label-xs whitespace-nowrap transition-colors">
+        Gula &amp; Pemanis (14)
+      </button>
+<button class="px-space-md py-1 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high font-label-xs text-label-xs whitespace-nowrap transition-colors">
+        Lemak &amp; Minyak (16)
+      </button>
+<button class="px-space-md py-1 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high font-label-xs text-label-xs whitespace-nowrap transition-colors">
+        Kemasan &amp; Box (32)
+      </button>
+</div>
+</div>
+<!-- Main Multi-Column Split Workspace (ERP Table + Active Item Inspector) -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
+<!-- ERP High-Density Table Area (8 Cols on XL) -->
+<div class="xl:col-span-8 space-y-space-md">
+<div class="rounded bg-surface-container-lowest shadow-sm overflow-hidden">
+<div class="px-space-md py-space-sm bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Tabel Normalisasi Harga Base Unit</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant bg-surface-container-highest px-2 py-0.5 rounded font-mono">6 Item Terpilih</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-label-xs text-label-xs text-on-surface-variant flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span> Highlight: Non-Linear
+            </span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-xs text-label-xs uppercase tracking-wider">
+<th class="py-2.5 px-space-md font-semibold">Bahan &amp; Kategori</th>
+<th class="py-2.5 px-space-sm font-semibold">Satuan Beli</th>
+<th class="py-2.5 px-space-sm font-semibold text-right">Harga Pembelian</th>
+<th class="py-2.5 px-space-sm font-semibold">Base Unit</th>
+<th class="py-2.5 px-space-sm font-semibold text-right">Harga Base Unit (6 Dec)</th>
+<th class="py-2.5 px-space-sm font-semibold">Aturan Khusus / Flag</th>
+<th class="py-2.5 px-space-md font-semibold text-right">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-transparent font-body-sm text-body-sm">
+<!-- Row 1: Active Row (Tepung Terigu) -->
+<tr class="bg-secondary-fixed/30 hover:bg-secondary-fixed/40 cursor-pointer transition-colors group" onclick="selectIngredient('tepung')">
+<td class="py-2.5 px-space-md">
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[18px] text-secondary mt-0.5">check_circle</span>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold group-hover:text-secondary transition-colors">
+                        Tepung Terigu Protein Tinggi
+                      </span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Cakra Kembar • SKU-FLR-001</span>
+<div class="mt-1">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-xs text-label-xs">Tepung &amp; Pati</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-space-sm font-data-cell text-data-cell text-on-surface">
+                  1 kg
+                  <div class="font-label-xs text-label-xs text-on-surface-variant">= 1.000 gr</div>
+</td>
+<td class="py-2.5 px-space-sm text-right font-data-cell text-data-cell font-semibold text-on-surface">
+                  Rp12.000
+                </td>
+<td class="py-2.5 px-space-sm font-data-cell text-data-cell text-on-surface">
+                  Gram (gr)
+                </td>
+<td class="py-2.5 px-space-sm text-right font-data-cell text-data-cell font-bold text-on-surface">
+                  Rp12,000000 <span class="font-normal text-on-surface-variant">/ gr</span>
+</td>
+<td class="py-2.5 px-space-sm">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-xs text-label-xs">
+<span class="material-symbols-outlined text-[13px]">straighten</span> Linear 1:1
+                  </span>
+</td>
+<td class="py-2.5 px-space-md text-right">
+<span class="inline-block px-2 py-0.5 rounded-full bg-surface-container-highest text-on-tertiary-container font-label-xs text-label-xs font-semibold">
+                    Aktif (v3)
+                  </span>
+</td>
+</tr>
+<!-- Row 2: Telur Ayam (Discrete Unit Flag) -->
+<tr class="hover:bg-surface-container-low cursor-pointer transition-colors group" onclick="selectIngredient('telur')">
+<td class="py-2.5 px-space-md">
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[18px] text-outline mt-0.5">radio_button_unchecked</span>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold group-hover:text-secondary transition-colors">
+                        Telur Ayam Ras Segar
+                      </span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Grade A Lokal • SKU-EGG-004</span>
+<div class="mt-1">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-xs text-label-xs">Dairy &amp; Telur</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-space-sm font-data-cell text-data-cell text-on-surface">
+                  1 butir
+                  <div class="font-label-xs text-label-xs text-on-surface-variant">Alt: 1 peti (15 kg)</div>
+</td>
+<td class="py-2.5 px-space-sm text-right font-data-cell text-data-cell font-semibold text-on-surface">
+                  Rp2.000
+                </td>
+<td class="py-2.5 px-space-sm font-data-cell text-data-cell text-on-surface">
+                  Gram / Butir
+                </td>
+<td class="py-2.5 px-space-sm text-right font-data-cell text-data-cell font-bold text-on-surface">
+                  Rp36,363636 <span class="font-normal text-on-surface-variant">/ gr</span>
+</td>
+<td class="py-2.5 px-space-sm">
+<div class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-label-xs text-label-xs font-semibold">
+<span class="material-symbols-outlined text-[13px]">counter_1</span> Discrete (±55g)
+                  </div>
+</td>
+<td class="py-2.5 px-space-md text-right">
+<span class="inline-block px-2 py-0.5 rounded-full bg-surface-container-highest text-on-tertiary-container font-label-xs text-label-xs font-semibold">
+                    Aktif (v1)
+                  </span>
+</td>
+</tr>
+<!-- Row 3: Ragi Instan (Non-Linear Alert Flag) -->
+<tr class="hover:bg-surface-container-low cursor-pointer transition-colors group bg-secondary-fixed/10" onclick="selectIngredient('ragi')">
+<td class="py-2.5 px-space-md">
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[18px] text-secondary mt-0.5">warning</span>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold group-hover:text-secondary transition-colors">
+                        Ragi Instan (Fermipan)
+                      </span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Sachet Vacuum • SKU-YST-002</span>
+<div class="mt-1">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-xs text-label-xs">Ragi &amp; Pengembang</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-space-sm font-data-cell text-data-cell text-on-surface">
+                  1 sachet
+                  <div class="font-label-xs text-label-xs text-on-surface-variant">= 11 gr</div>
+</td>
+<td class="py-2.5 px-space-sm text-right font-data-cell text-data-cell font-semibold text-on-surface">
+                  Rp3.000
+                </td>
+<td class="py-2.5 px-space-sm font-data-cell text-data-cell text-on-surface">
+                  Gram (gr)
+                </td>
+<td class="py-2.5 px-space-sm text-right font-data-cell text-data-cell font-bold text-on-surface">
+                  Rp272,727273 <span class="font-normal text-on-surface-variant">/ gr</span>
+</td>
+<td class="py-2.5 px-space-sm">
+<div class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-secondary-container text-on-secondary-container font-label-xs text-label-xs font-semibold">
+<span class="material-symbols-outlined text-[13px]">bolt</span> Non-Linear Scale
+                  </div>
+</td>
+<td class="py-2.5 px-space-md text-right">
+<span class="inline-block px-2 py-0.5 rounded-full bg-surface-container-highest text-on-tertiary-container font-label-xs text-label-xs font-semibold">
+                    Aktif (v2)
+                  </span>
+</td>
+</tr>
+<!-- Row 4: Butter Unsalted -->
+<tr class="hover:bg-surface-container-low cursor-pointer transition-colors group" onclick="selectIngredient('butter')">
+<td class="py-2.5 px-space-md">
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[18px] text-outline mt-0.5">radio_button_unchecked</span>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold group-hover:text-secondary transition-colors">
+                        Butter Unsalted (Elle &amp; Vire)
+                      </span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">82% Fat • SKU-BTR-008</span>
+<div class="mt-1">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-xs text-label-xs">Dairy</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-space-sm font-data-cell text-data-cell text-on-surface">
+                  1 blok
+                  <div class="font-label-xs text-label-xs text-on-surface-variant">= 2.500 gr</div>
+</td>
+<td class="py-2.5 px-space-sm text-right font-data-cell text-data-cell font-semibold text-on-surface">
+                  Rp385.000
+                </td>
+<td class="py-2.5 px-space-sm font-data-cell text-data-cell text-on-surface">
+                  Gram (gr)
+                </td>
+<td class="py-2.5 px-space-sm text-right font-data-cell text-data-cell font-bold text-on-surface">
+                  Rp154,000000 <span class="font-normal text-on-surface-variant">/ gr</span>
+</td>
+<td class="py-2.5 px-space-sm">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-xs text-label-xs">
+<span class="material-symbols-outlined text-[13px]">straighten</span> Bulk Slab
+                  </span>
+</td>
+<td class="py-2.5 px-space-md text-right">
+<span class="inline-block px-2 py-0.5 rounded-full bg-surface-container-highest text-on-tertiary-container font-label-xs text-label-xs font-semibold">
+                    Aktif (v5)
+                  </span>
+</td>
+</tr>
+<!-- Row 5: Gula Pasir Kristal -->
+<tr class="hover:bg-surface-container-low cursor-pointer transition-colors group" onclick="selectIngredient('gula')">
+<td class="py-2.5 px-space-md">
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[18px] text-outline mt-0.5">radio_button_unchecked</span>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold group-hover:text-secondary transition-colors">
+                        Gula Pasir Kristal Putih
+                      </span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">GMP Premium • SKU-SGR-002</span>
+<div class="mt-1">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-xs text-label-xs">Gula</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-space-sm font-data-cell text-data-cell text-on-surface">
+                  1 sak
+                  <div class="font-label-xs text-label-xs text-on-surface-variant">= 50.000 gr</div>
+</td>
+<td class="py-2.5 px-space-sm text-right font-data-cell text-data-cell font-semibold text-on-surface">
+                  Rp850.000
+                </td>
+<td class="py-2.5 px-space-sm font-data-cell text-data-cell text-on-surface">
+                  Gram (gr)
+                </td>
+<td class="py-2.5 px-space-sm text-right font-data-cell text-data-cell font-bold text-on-surface">
+                  Rp17,000000 <span class="font-normal text-on-surface-variant">/ gr</span>
+</td>
+<td class="py-2.5 px-space-sm">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-xs text-label-xs">
+<span class="material-symbols-outlined text-[13px]">straighten</span> Wholesale Sak
+                  </span>
+</td>
+<td class="py-2.5 px-space-md text-right">
+<span class="inline-block px-2 py-0.5 rounded-full bg-surface-container-highest text-on-tertiary-container font-label-xs text-label-xs font-semibold">
+                    Aktif (v2)
+                  </span>
+</td>
+</tr>
+<!-- Row 6: Minyak Nabati -->
+<tr class="hover:bg-surface-container-low cursor-pointer transition-colors group" onclick="selectIngredient('minyak')">
+<td class="py-2.5 px-space-md">
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[18px] text-outline mt-0.5">radio_button_unchecked</span>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold group-hover:text-secondary transition-colors">
+                        Minyak Nabati (Bimoli)
+                      </span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Minyak Kelapa Sawit • SKU-OIL-003</span>
+<div class="mt-1">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-xs text-label-xs">Minyak</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-space-sm font-data-cell text-data-cell text-on-surface">
+                  2 liter
+                  <div class="font-label-xs text-label-xs text-on-surface-variant">= 2.000 ml</div>
+</td>
+<td class="py-2.5 px-space-sm text-right font-data-cell text-data-cell font-semibold text-on-surface">
+                  Rp38.000
+                </td>
+<td class="py-2.5 px-space-sm font-data-cell text-data-cell text-on-surface">
+                  Mililiter (ml)
+                </td>
+<td class="py-2.5 px-space-sm text-right font-data-cell text-data-cell font-bold text-on-surface">
+                  Rp19,000000 <span class="font-normal text-on-surface-variant">/ ml</span>
+</td>
+<td class="py-2.5 px-space-sm">
+<div class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface font-label-xs text-label-xs">
+<span class="material-symbols-outlined text-[13px]">swap_vert</span> 1 sdm = 15 ml
+                  </div>
+</td>
+<td class="py-2.5 px-space-md text-right">
+<span class="inline-block px-2 py-0.5 rounded-full bg-surface-container-highest text-on-tertiary-container font-label-xs text-label-xs font-semibold">
+                    Aktif (v1)
+                  </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Monospaced Status Strip -->
+<div class="p-space-sm bg-surface-container-low flex flex-col sm:flex-row items-center justify-between text-on-surface-variant font-label-xs text-label-xs gap-space-xs">
+<span>Menampilkan 6 dari 148 SKU Bahan Baku Terdaftar</span>
+<div class="flex items-center gap-space-sm">
+<span>Presisi Kalkulasi: IEEE 754 Monetary Decimal (6 digit)</span>
+<button class="text-secondary hover:underline font-semibold">Ekspor Master Data .JSON</button>
+</div>
+</div>
+</div>
+<!-- Dimension & Volumetric Conversion Card (Fast Quick Reference) -->
+<div class="rounded bg-surface-container-lowest p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary">balance</span>
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Standar Konversi Culinary &amp; Kitchen Scale</span>
+</div>
+<span class="font-label-xs text-label-xs text-on-surface-variant bg-surface-container-low px-2 py-0.5 rounded">Kitchen Rule 2024</span>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-sm font-label-xs text-label-xs">
+<div class="p-space-sm rounded bg-surface-container-low flex flex-col">
+<span class="text-on-surface-variant">1 Sendok Makan (sdm)</span>
+<span class="font-data-cell text-data-cell text-on-surface font-bold mt-1">15 ml / 14,3 gr</span>
+<span class="text-on-surface-variant text-[10px] mt-0.5">Standar Air / Madu</span>
+</div>
+<div class="p-space-sm rounded bg-surface-container-low flex flex-col">
+<span class="text-on-surface-variant">1 Sendok Teh (sdt)</span>
+<span class="font-data-cell text-data-cell text-on-surface font-bold mt-1">5 ml / 4,8 gr</span>
+<span class="text-on-surface-variant text-[10px] mt-0.5">Ragi &amp; Garam halus</span>
+</div>
+<div class="p-space-sm rounded bg-surface-container-low flex flex-col">
+<span class="text-on-surface-variant">1 Cup Tepung (All-Purpose)</span>
+<span class="font-data-cell text-data-cell text-on-surface font-bold mt-1">125 gr</span>
+<span class="text-on-surface-variant text-[10px] mt-0.5">Ayak tanpa kompresi</span>
+</div>
+<div class="p-space-sm rounded bg-surface-container-low flex flex-col">
+<span class="text-on-surface-variant">1 Butir Telur Ayam (A)</span>
+<span class="font-data-cell text-data-cell text-on-surface font-bold mt-1">±55 gr</span>
+<span class="text-on-surface-variant text-[10px] mt-0.5">Putih 35g, Kuning 20g</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Active Item Inspector (Right Docked Panel - 4 Cols on XL) -->
+<div class="xl:col-span-4 space-y-space-md sticky top-20">
+<!-- Panel Header & Card -->
+<div class="rounded bg-surface-container-lowest shadow-md overflow-hidden">
+<div class="p-space-md bg-primary-container text-surface-container-lowest">
+<div class="flex items-center justify-between">
+<span class="font-label-xs text-label-xs text-secondary-fixed uppercase tracking-wider font-semibold">SKU Inspector [Active]</span>
+<span class="font-data-cell text-label-xs bg-surface-container-highest/20 px-2 py-0.5 rounded text-surface-container-lowest">SKU-FLR-001</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-surface-container-lowest mt-1">Tepung Terigu Cakra Kembar</h2>
+<div class="flex items-center gap-space-sm mt-space-xs font-label-xs text-label-xs text-surface-container-high">
+<span>Kategori: Tepung &amp; Pati</span>
+<span>•</span>
+<span>Supplier: PT Bogasari Utama</span>
+</div>
+</div>
+<!-- Inspection Tabs -->
+<div class="flex border-b border-surface-container-high bg-surface-container-low px-space-md pt-2 gap-space-xs">
+<button class="pb-2 px-space-sm font-label-md text-label-md font-semibold text-secondary border-b-2 border-secondary transition-colors" id="tabBtnHistory" onclick="switchInspectorTab('history')">
+            Riwayat Harga
+          </button>
+<button class="pb-2 px-space-sm font-label-md text-label-md font-medium text-on-surface-variant hover:text-on-surface transition-colors" id="tabBtnConversion" onclick="switchInspectorTab('conversion')">
+            Konversi Satuan
+          </button>
+<button class="pb-2 px-space-sm font-label-md text-label-md font-medium text-on-surface-variant hover:text-on-surface transition-colors" id="tabBtnRecipes" onclick="switchInspectorTab('recipes')">
+            Resep Terkait (3)
+          </button>
+</div>
+<!-- Tab 1: Append-Only Price Ledger -->
+<div class="p-space-md space-y-space-md block" id="inspectorTabHistory">
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Audit Riwayat Harga (Append-Only)</span>
+<button class="inline-flex items-center gap-1 font-label-xs text-label-xs text-secondary hover:underline font-semibold">
+<span class="material-symbols-outlined text-[14px]">add</span> Entri Harga Baru
+            </button>
+</div>
+<div class="space-y-space-xs">
+<!-- Price Entry 1 (Current Active) -->
+<div class="p-space-sm rounded bg-surface-container-highest/40 flex flex-col space-y-1">
+<div class="flex items-center justify-between">
+<span class="font-data-cell text-data-cell font-bold text-on-surface">Rp12.000 <span class="font-normal text-on-surface-variant text-label-xs">/ kg</span></span>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded bg-tertiary-fixed text-tertiary-container font-semibold">Aktif Sekarang</span>
+</div>
+<div class="flex items-center justify-between font-label-xs text-label-xs text-on-surface-variant">
+<span>Efektif: 24 Okt 2024 • Diubah oleh Chef Ayu</span>
+<span class="font-mono">PO-2024-8891</span>
+</div>
+<div class="text-[11px] text-on-surface-variant bg-surface-container-lowest p-1.5 rounded mt-1 font-mono">
+                Base: Rp12,000000 / gr • Penyesuaian margin gandum import (+4.3%)
+              </div>
+</div>
+<!-- Price Entry 2 (Archived) -->
+<div class="p-space-sm rounded bg-surface-container-low flex flex-col space-y-1 opacity-80">
+<div class="flex items-center justify-between">
+<span class="font-data-cell text-data-cell font-semibold text-on-surface">Rp11.500 <span class="font-normal text-on-surface-variant text-label-xs">/ kg</span></span>
+<span class="font-label-xs text-label-xs px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-mono">Archived (v2)</span>
+</div>
+<div class="flex items-center justify-between font-label-xs text-label-xs text-on-surface-variant">
+<span>15 Agu 2024 — 23 Okt 2024</span>
+<span class="font-mono">PO-2024-5120</span>
+</div>
+</div>
+<!-- Price Entry 3 (Archived) -->
+<div class="p-space-sm rounded bg-surface-container-low flex flex-col space-y-1 opacity-70">
+<div class="flex items-center justify-between">
+<span class="font-data-cell text-data-cell font-semibold text-on-surface">Rp11.000 <span class="font-normal text-on-surface-variant text-label-xs">/ kg</span></span>
+<span class="font-label-xs text-label-xs px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-mono">Archived (v1)</span>
+</div>
+<div class="flex items-center justify-between font-label-xs text-label-xs text-on-surface-variant">
+<span>10 Mei 2024 — 14 Agu 2024</span>
+<span class="font-mono">PO-2024-1002</span>
+</div>
+</div>
+</div>
+<div class="p-space-sm rounded bg-surface-container-low text-on-surface-variant font-label-xs text-label-xs flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">lock</span>
+<span>Setiap perubahan harga tersimpan secara append-only. Resep historis mempertahankan HPP saat produksi dieksekusi tanpa distorsi margin lampau.</span>
+</div>
+</div>
+<!-- Tab 2: Custom Conversions Matrix -->
+<div class="p-space-md space-y-space-md hidden" id="inspectorTabConversion">
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Konversi Satuan Khusus (SKU)</span>
+<button class="inline-flex items-center gap-1 font-label-xs text-label-xs text-secondary hover:underline font-semibold">
+<span class="material-symbols-outlined text-[14px]">tune</span> Tambah Dimensi
+            </button>
+</div>
+<div class="space-y-space-xs font-body-sm text-body-sm">
+<div class="p-space-sm rounded bg-surface-container-low flex items-center justify-between">
+<div>
+<div class="font-semibold text-on-surface">1 Sak / Karung Industri</div>
+<div class="font-label-xs text-label-xs text-on-surface-variant">Wholesale Bogasari packaging</div>
+</div>
+<div class="text-right">
+<span class="font-data-cell text-data-cell font-bold text-on-surface">25.000 gr</span>
+<span class="block font-label-xs text-label-xs text-on-tertiary-container font-semibold">Tervalidasi (100%)</span>
+</div>
+</div>
+<div class="p-space-sm rounded bg-surface-container-low flex items-center justify-between">
+<div>
+<div class="font-semibold text-on-surface">1 Cup Tepung Standard</div>
+<div class="font-label-xs text-label-xs text-on-surface-variant">Kitchen spoon &amp; level test</div>
+</div>
+<div class="text-right">
+<span class="font-data-cell text-data-cell font-bold text-on-surface">125 gr</span>
+<span class="block font-label-xs text-label-xs text-on-tertiary-container font-semibold">Tervalidasi (100%)</span>
+</div>
+</div>
+<div class="p-space-sm rounded bg-surface-container-low flex items-center justify-between">
+<div>
+<div class="font-semibold text-on-surface">1 Bal Mini</div>
+<div class="font-label-xs text-label-xs text-on-surface-variant">Retail bundle (10 pack x 1kg)</div>
+</div>
+<div class="text-right">
+<span class="font-data-cell text-data-cell font-bold text-on-surface">10.000 gr</span>
+<span class="block font-label-xs text-label-xs text-on-tertiary-container font-semibold">Tervalidasi (100%)</span>
+</div>
+</div>
+</div>
+<div class="p-space-sm rounded bg-secondary-fixed/40 text-on-surface font-label-xs text-label-xs">
+<span class="font-semibold text-secondary">Formula Validasi:</span> Satuan volume dan wadah otomatis dikonversi ke base unit Gram (gr) berdasarkan berat jenis flour = 0.529 g/cm³.
+          </div>
+</div>
+<!-- Tab 3: Connected Recipes & Margin Impact -->
+<div class="p-space-md space-y-space-md hidden" id="inspectorTabRecipes">
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Resep Terkait Aktif</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded">3 Formula Terdeteksi</span>
+</div>
+<div class="space-y-space-xs font-body-sm text-body-sm">
+<div class="p-space-sm rounded bg-surface-container-low flex flex-col space-y-1">
+<div class="flex items-center justify-between">
+<span class="font-semibold text-on-surface">Brioche Butter Loaf</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">600 gr per loaf</span>
+</div>
+<div class="flex items-center justify-between font-label-xs text-label-xs text-on-surface-variant">
+<span>Proporsi HPP Tepung: 18.4%</span>
+<span class="font-data-cell font-bold text-on-surface">Rp7.200 / loaf</span>
+</div>
+</div>
+<div class="p-space-sm rounded bg-surface-container-low flex flex-col space-y-1">
+<div class="flex items-center justify-between">
+<span class="font-semibold text-on-surface">Artisan French Baguette</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">450 gr per unit</span>
+</div>
+<div class="flex items-center justify-between font-label-xs text-label-xs text-on-surface-variant">
+<span>Proporsi HPP Tepung: 54.2%</span>
+<span class="font-data-cell font-bold text-on-surface">Rp5.400 / unit</span>
+</div>
+</div>
+<div class="p-space-sm rounded bg-surface-container-low flex flex-col space-y-1">
+<div class="flex items-center justify-between">
+<span class="font-semibold text-on-surface">Roti Manis Pemula (Soft Bun)</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">1.000 gr batch</span>
+</div>
+<div class="flex items-center justify-between font-label-xs text-label-xs text-on-surface-variant">
+<span>Proporsi HPP Tepung: 31.0%</span>
+<span class="font-data-cell font-bold text-on-surface">Rp12.000 / batch</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2 px-space-md rounded bg-secondary text-on-secondary hover:bg-secondary-fixed-variant transition-colors font-label-md text-label-md font-semibold flex items-center justify-center gap-space-xs shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">query_stats</span>
+<span>Cek Simulasi Dampak Kenaikan Harga</span>
+</button>
+</div>
+<!-- Sticky Quick Action Bar in Panel -->
+<div class="p-space-md bg-surface-container-low border-t border-surface-container-high flex items-center justify-between">
+<button class="px-space-md py-1.5 rounded bg-surface-container-highest text-on-surface font-label-xs text-label-xs font-semibold hover:bg-surface-container-high transition-colors" type="button">
+            Edit SKU
+          </button>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md py-1.5 rounded bg-primary-container text-surface-container-lowest font-label-xs text-label-xs font-semibold hover:bg-primary transition-colors" type="button">
+              Update Harga Beli
+            </button>
+</div>
+</div>
+</div>
+<!-- Ingredient Visual Specs & Batch Loss Note -->
+<div class="rounded bg-surface-container-lowest p-space-md shadow-sm space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Toleransi Baking Loss</span>
+<span class="font-label-xs text-label-xs bg-surface-container-high text-on-surface-variant px-1.5 py-0.5 rounded font-mono">Loss: 1.5%</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Penyusutan tepung akibat dusting board dan moisture evaporation terhitung dalam HPP Engine sebesar 1.5% dari netto takaran resep.
+        </p>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function switchInspectorTab(tabId) {
+    const tabs = ['history', 'conversion', 'recipes'];
+    tabs.forEach(t => {
+      const panel = document.getElementById('inspectorTab' + t.charAt(0).toUpperCase() + t.slice(1));
+      const btn = document.getElementById('tabBtn' + t.charAt(0).toUpperCase() + t.slice(1));
+      if (panel && btn) {
+        if (t === tabId) {
+          panel.classList.remove('hidden');
+          panel.classList.add('block');
+          btn.classList.add('text-secondary', 'border-b-2', 'border-secondary', 'font-semibold');
+          btn.classList.remove('text-on-surface-variant', 'font-medium');
+        } else {
+          panel.classList.add('hidden');
+          panel.classList.remove('block');
+          btn.classList.remove('text-secondary', 'border-b-2', 'border-secondary', 'font-semibold');
+          btn.classList.add('text-on-surface-variant', 'font-medium');
+        }
+      }
+    });
+  }
+
+  function selectIngredient(type) {
+    // Interactive handler to preview ingredients in production inspector
+    console.log('Active SKU selected:', type);
+  }
+</script></main></div></body></html>

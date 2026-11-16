@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-container-highest":"#d3e4fe","secondary-fixed":"#ffdcc3","on-primary":"#ffffff","surface-container-high":"#dce9ff","on-primary-fixed-variant":"#3f465c","surface-container-lowest":"#ffffff","tertiary-fixed-dim":"#68dba9","on-tertiary-container":"#069669","on-tertiary":"#ffffff","on-secondary":"#ffffff","on-primary-container":"#7c839b","primary":"#000000","surface-tint":"#565e74","surface-dim":"#cbdbf5","tertiary-container":"#002114","on-surface-variant":"#45464d","surface":"#f8f9ff","inverse-on-surface":"#eaf1ff","inverse-primary":"#bec6e0","primary-container":"#131b2e","on-secondary-container":"#663500","secondary-fixed-dim":"#ffb77d","on-error":"#ffffff","tertiary":"#000000","on-secondary-fixed":"#2f1500","outline-variant":"#c6c6cd","tertiary-fixed":"#85f8c4","surface-variant":"#d3e4fe","on-primary-fixed":"#131b2e","on-error-container":"#93000a","on-secondary-fixed-variant":"#6e3900","surface-bright":"#f8f9ff","background":"#f8f9ff","primary-fixed":"#dae2fd","on-background":"#0b1c30","on-tertiary-fixed-variant":"#005137","secondary":"#904d00","secondary-container":"#fe932c","outline":"#76777d","surface-container":"#e5eeff","surface-container-low":"#eff4ff","on-surface":"#0b1c30","on-tertiary-fixed":"#002114","error-container":"#ffdad6","error":"#ba1a1a","primary-fixed-dim":"#bec6e0","inverse-surface":"#213145"},borderRadius:{DEFAULT:"0.125rem",lg:"0.25rem",xl:"0.5rem",full:"0.75rem"},spacing:{"gutter-desktop":"1.5rem",gutter:"1rem",margin:"1rem","space-xs":"0.25rem","space-md":"0.75rem","margin-desktop":"2rem","space-lg":"1.25rem","space-sm":"0.5rem","space-xl":"2rem"},fontFamily:{"headline-lg":["Plus Jakarta Sans"],"label-xs":["JetBrains Mono"],"body-md":["Inter"],"data-cell":["JetBrains Mono"],"title-sm":["Inter"],"headline-md":["Plus Jakarta Sans"],"data-metric":["JetBrains Mono"],"headline-lg-mobile":["Plus Jakarta Sans"],"label-md":["Inter"],"body-sm":["Inter"],display:["Plus Jakarta Sans"]},fontSize:{"headline-lg":["28px",{lineHeight:"36px",letterSpacing:"-0.02em",fontWeight:"700"}],"label-xs":["11px",{lineHeight:"14px",fontWeight:"500"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"data-cell":["13px",{lineHeight:"18px",fontWeight:"500"}],"title-sm":["16px",{lineHeight:"24px",letterSpacing:"-0.005em",fontWeight:"600"}],"headline-md":["20px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}],"data-metric":["20px",{lineHeight:"24px",letterSpacing:"-0.02em",fontWeight:"600"}],"headline-lg-mobile":["22px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"700"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"600"}],"body-sm":["13px",{lineHeight:"18px",fontWeight:"400"}],display:["36px",{lineHeight:"44px",letterSpacing:"-0.02em",fontWeight:"700"}]}}}}</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-72 bg-primary-container text-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center justify-between bg-primary-container"><div class="flex items-center gap-space-md"><img alt="BakeCost Scale Icon" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrBTkY7jmIfityYuKlCR0LNWVuuxRbkmkyBxZVzlJWFPhXTU_C8kfOA-SqlxogvPPFyiCV-36lMV4GxbU06_z6frm1iZatG63k6sKkmZB3ZC9tzQHfZF2r8q9eSUGiuWJ7Pl81c5zjyNuDhGE7aiG7rG2ZHV7X5-qWfVmABIa8_b0pDkkQpCiuLK24yEWyuGzId4GrvxpyP_HBk6MnMPmdsoV2QLh_BrsJxjHNt-7TuJjw"/><div class="flex flex-col"><span class="font-title-sm text-title-sm text-surface-container-lowest leading-none tracking-tight">BakeCost Ops</span><span class="font-label-xs text-label-xs text-on-primary-container tracking-wider uppercase mt-space-xs">Culinary ERP</span></div></div></div><div class="px-space-md py-space-sm"><div class="inline-flex items-center gap-space-xs px-space-sm py-space-xs rounded bg-surface-container-highest/20 text-surface-container-high font-label-xs text-label-xs"><span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span><span>Fase 1: Production Costing</span></div></div><div class="px-space-md py-space-xs"><div class="font-label-xs text-label-xs uppercase tracking-wider text-on-primary-container px-space-sm mb-space-xs font-semibold">Modul Operasional</div><nav class="space-y-space-xs" data-active-classes="bg-surface-container-highest/15 text-surface-container-lowest font-semibold border-l-2 border-secondary-container"><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-surface-container-high hover:bg-surface-container-highest/10 hover:text-surface-container-lowest transition-all" data-path="dashboard-overview" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="font-body-sm text-body-sm">Dashboard &amp; Overview</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-surface-container-high hover:bg-surface-container-highest/10 hover:text-surface-container-lowest transition-all" data-path="bahan-baku-inventory" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span class="font-body-sm text-body-sm">Bahan Baku &amp; Inventory</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-surface-container-high hover:bg-surface-container-highest/10 hover:text-surface-container-lowest transition-all" data-path="recipe-studio-scaler" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-body-sm text-body-sm">Recipe Studio &amp; Scaler</span></a><a aria-current="page" class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg transition-all bg-surface-container-highest/15 text-surface-container-lowest font-semibold border-l-2 border-secondary-container" data-path="hpp-engine-margin-simulator" href="#"><span class="material-symbols-outlined text-[20px]">calculate</span><span class="font-body-sm text-body-sm">HPP Engine &amp; Margin Simulator</span></a></nav></div><div class="px-space-md py-space-xs mt-space-md"><div class="font-label-xs text-label-xs uppercase tracking-wider text-on-primary-container px-space-sm mb-space-xs font-semibold">Tata Kelola &amp; Panduan</div><nav class="space-y-space-xs" data-active-classes="bg-surface-container-highest/15 text-surface-container-lowest font-semibold border-l-2 border-secondary-container"><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-surface-container-high hover:bg-surface-container-highest/10 hover:text-surface-container-lowest transition-all" data-path="audit-log-perubahan" href="#"><span class="material-symbols-outlined text-[20px]">history</span><span class="font-body-sm text-body-sm">Audit Log Perubahan</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-surface-container-high hover:bg-surface-container-highest/10 hover:text-surface-container-lowest transition-all" data-path="panduan-standar-biaya-fb" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-body-sm text-body-sm">Panduan Standar Biaya F&amp;B</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-surface-container-high hover:bg-surface-container-highest/10 hover:text-surface-container-lowest transition-all" data-path="pengaturan" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-body-sm text-body-sm">Pengaturan</span></a></nav></div></div><div class="p-space-md bg-primary-container/80"><div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-highest/10"><div class="flex items-center gap-space-sm"><div class="w-2 h-2 rounded-full bg-tertiary-fixed"></div><div class="flex flex-col"><span class="font-label-xs text-label-xs text-surface-container-lowest font-semibold">Database Sinkron</span><span class="font-label-xs text-label-xs text-on-primary-container">v1.4.2 Production</span></div></div><span class="material-symbols-outlined text-[18px] text-on-primary-container">cloud_done</span></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-lg flex-1 max-w-xl"><div class="relative w-full"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span><input class="w-full pl-10 pr-space-md py-space-xs bg-surface-container-low text-on-surface placeholder:text-on-surface-variant font-body-sm text-body-sm rounded-lg focus:outline-none focus:bg-surface-container-lowest focus:ring-1 focus:ring-secondary transition-all" placeholder="Cari formula resep, SKU bahan baku, atau kode batch..." type="text"/></div></div><div class="flex items-center gap-space-md"><div class="inline-flex items-center gap-space-xs px-space-md py-space-xs bg-surface-container-low rounded-lg text-on-surface"><span class="material-symbols-outlined text-[18px] text-secondary">payments</span><span class="font-label-xs text-label-xs uppercase font-semibold">Mata Uang:</span><span class="font-data-cell text-data-cell font-bold text-on-surface">IDR (Rp)</span></div><div class="h-6 w-px bg-surface-container-high"></div><button class="p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors relative" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full"></span></button><div class="flex items-center gap-space-md pl-space-xs"><div class="flex flex-col text-right"><span class="font-title-sm text-title-sm text-on-surface leading-tight font-semibold">Chef Ayu</span><span class="font-label-xs text-label-xs text-on-surface-variant font-medium">Head Baker &amp; R&amp;D</span></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-[0_1px_4px_rgba(0,0,0,0.1)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdg8ggiA8yrSANXWUsHC4bPs-trULzLlFynizeOD3z8q1m-xvX3i_VYS-Pg6XjPBeOYKvyaviiEVOemH5ZZNuUpKQ2mw7qv6znyHoIv_hkmFueV3Vz3UhdQUTM4vI0aFyHpn2o_avTUCmvsIf5vMhHJr8-ZSd5nz8cqciOUe-PYnJDtOa6EAt4PeNW61mpnk7jyg0ElXYDsOGw-y0PeNjCJzTyjCR6F0zO5if66JSq"/></div></div></header><main class="w-full pt-16 bg-surface min-h-screen px-space-xl py-space-lg"><div class="flex flex-col w-full">
+<!-- Top Navigation & Control Surface -->
+<div class="flex flex-col gap-space-lg mb-space-xl">
+<!-- Header Title Bar with Strategy Selectors -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-space-xs text-secondary mb-space-xs font-label-xs text-label-xs uppercase tracking-wider font-semibold">
+<span class="material-symbols-outlined text-[16px]">calculate</span>
+<span>BakeCost Financial Core • PRD Sec 4, 5.4, 5.5, 6</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">HPP Engine &amp; Margin Simulator</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl mt-space-xs">
+          Simulasi harga pokok produksi per batch/unit, kalkulasi margin, markup, food cost ratio, break-even point, dan analisis sensitivitas bahan baku secara real-time.
+        </p>
+</div>
+<!-- Quick Actions / Recipe Switcher -->
+<div class="flex flex-wrap items-center gap-space-sm bg-surface-container-lowest p-space-xs rounded-xl shadow-sm">
+<!-- Target Recipe Selector -->
+<div class="relative min-w-[260px]">
+<select class="w-full appearance-none bg-surface-container-low text-on-surface font-title-sm text-title-sm pl-space-md pr-10 py-space-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-secondary cursor-pointer" id="recipe-selector">
+<option value="roti-pemula-1">Roti Pemula (Classic Loaf) - Batch x1 (5 pcs)</option>
+<option value="roti-pemula-2">Roti Pemula (Classic Loaf) - Batch x2 (10 pcs)</option>
+<option value="brioche-loaf">Brioche Nanterre - Batch x1 (4 pcs)</option>
+<option value="croissant-butter">Butter Croissant - Batch x1 (12 pcs)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-[18px]">expand_more</span>
+</div>
+<!-- Batch Toggle Pill -->
+<div class="inline-flex items-center bg-surface-container-low p-0.5 rounded-lg text-label-xs font-label-xs">
+<button class="px-space-md py-1.5 rounded bg-surface-container-lowest font-bold text-on-surface shadow-sm transition-all" id="batch-btn-1">Batch x1</button>
+<button class="px-space-md py-1.5 rounded text-on-surface-variant hover:text-on-surface transition-all" id="batch-btn-2">Batch x2</button>
+</div>
+</div>
+</div>
+<!-- Strategy Selector Strip -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md bg-surface-container-low px-space-lg py-space-sm rounded-xl">
+<div class="flex items-center gap-space-md flex-wrap">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-on-surface-variant font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-secondary">tune</span>
+          Strategi Valuasi Bahan:
+        </span>
+<div class="inline-flex bg-surface-container-lowest p-0.5 rounded-lg shadow-sm font-label-xs text-label-xs">
+<button class="px-space-md py-1 rounded bg-primary-container text-surface-container-lowest font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed"></span>
+            Latest (Terakhir) — Default
+          </button>
+<button class="px-space-md py-1 text-on-surface-variant hover:text-on-surface transition-colors">
+            Average (Rata-rata Bergerak)
+          </button>
+<button class="px-space-md py-1 text-on-surface-variant hover:text-on-surface transition-colors">
+            Snapshot Historis
+          </button>
+</div>
+</div>
+<div class="flex items-center gap-space-md text-label-xs font-label-xs text-on-surface-variant">
+<span class="inline-flex items-center gap-1 px-space-sm py-0.5 rounded bg-surface-container-highest/60 text-on-surface">
+<span class="material-symbols-outlined text-[14px] text-secondary">verified_user</span>
+          Formula Teruji: Acceptance Ref Sec 6
+        </span>
+<span class="text-outline-variant">•</span>
+<span>Mata Uang: <strong>IDR (Rp)</strong></span>
+</div>
+</div>
+</div>
+<!-- Section 2: The Core Financial Matrix (PRD Section 4 & 6 Acceptance Reference Display) -->
+<div class="mb-space-xl">
+<div class="flex items-center justify-between mb-space-md">
+<div>
+<h2 class="font-title-sm text-title-sm text-on-surface">Matriks Finansial &amp; Parameter Penjualan Utama</h2>
+<p class="font-label-xs text-label-xs text-on-surface-variant">Kalkulasi presisi berstandar ERP F&amp;B • Basis kalkulasi: Batch x1 (5 pcs)</p>
+</div>
+<div class="hidden sm:flex items-center gap-2 text-label-xs font-label-xs text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-on-tertiary-container"></span>
+<span>Food Cost Sehat (Target 25% - 30%)</span>
+</div>
+</div>
+<!-- 4 Primary KPI Highlight Quadrants & Extended Metrics (Bento Matrix) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Card 1: HPP per Unit -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div class="absolute -right-3 -top-3 w-16 h-16 bg-surface-container-high/40 rounded-full blur-xl pointer-events-none"></div>
+<div>
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-on-surface-variant font-semibold">Metric 01 • HPP Unit</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">inventory_2</span>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-surface font-headline-lg tracking-tight" id="kpi-hpp-unit">
+            Rp2.600
+          </div>
+<p class="font-label-xs text-label-xs text-on-surface-variant mt-1">
+            Total Batch (5 roti): <span class="font-data-cell font-bold text-on-surface" id="kpi-hpp-batch">Rp13.000</span>
+</p>
+</div>
+<div class="mt-space-md pt-space-xs bg-surface-container-low/60 -mx-space-lg -mb-space-lg px-space-lg py-space-xs flex items-center justify-between text-label-xs font-label-xs text-on-surface-variant">
+<span>Bahan Baku Pokok</span>
+<span class="font-data-cell text-on-surface font-semibold">100% Raw Batch</span>
+</div>
+</div>
+<!-- Card 2: Harga Jual per Unit (Interactive Presets) -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative">
+<div>
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-on-surface-variant font-semibold">Metric 02 • Harga Jual Unit</span>
+<span class="inline-flex items-center gap-0.5 text-label-xs font-label-xs bg-secondary-fixed/50 text-on-secondary-fixed px-1.5 py-0.5 rounded font-bold">Input Aktif</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg text-headline-lg text-secondary font-headline-lg tracking-tight" id="kpi-price-display">Rp10.000</span>
+</div>
+<!-- Presets -->
+<div class="flex items-center gap-1 mt-2">
+<button class="px-2 py-0.5 rounded text-label-xs font-data-cell bg-surface-container-low hover:bg-surface-container text-on-surface transition-colors" onclick="setSellingPrice(8000)">Rp8k</button>
+<button class="px-2 py-0.5 rounded text-label-xs font-data-cell bg-primary-container text-surface-container-lowest font-bold transition-colors" onclick="setSellingPrice(10000)">Rp10k</button>
+<button class="px-2 py-0.5 rounded text-label-xs font-data-cell bg-surface-container-low hover:bg-surface-container text-on-surface transition-colors" onclick="setSellingPrice(12000)">Rp12k</button>
+<button class="px-2 py-0.5 rounded text-label-xs font-data-cell bg-surface-container-low hover:bg-surface-container text-on-surface transition-colors" onclick="setSellingPrice(15000)">Rp15k</button>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs">
+<input class="w-full accent-secondary cursor-pointer h-1.5 bg-surface-container-high rounded-lg appearance-none" id="price-slider" max="25000" min="3000" step="500" type="range" value="10000"/>
+</div>
+</div>
+<!-- Card 3: Laba Kotor & Gross Margin -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-on-surface-variant font-semibold">Metric 03 • Laba Kotor Unit</span>
+<span class="material-symbols-outlined text-on-tertiary-container text-[20px]">trending_up</span>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-surface tracking-tight" id="kpi-gross-profit">
+            Rp7.400
+          </div>
+<p class="font-label-xs text-label-xs text-on-surface-variant mt-1">
+            Formula: <span class="font-data-cell">Harga Jual − HPP</span>
+</p>
+</div>
+<div class="mt-space-md pt-space-xs bg-surface-container-low/60 -mx-space-lg -mb-space-lg px-space-lg py-space-xs flex items-center justify-between">
+<span class="text-label-xs font-label-xs text-on-surface-variant">Laba Kotor Total (Batch):</span>
+<span class="font-data-cell text-data-cell font-bold text-on-tertiary-container" id="kpi-batch-profit">Rp37.000</span>
+</div>
+</div>
+<!-- Card 4: Gross Margin % & Food Cost % -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-on-surface-variant font-semibold">Metric 04 • Gross Margin</span>
+<span class="px-2 py-0.5 rounded text-label-xs font-label-xs bg-tertiary-fixed text-on-tertiary-fixed font-bold" id="margin-status-badge">Super Healthy</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-on-surface tracking-tight" id="kpi-gross-margin">74.0%</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">(Rp7.400 / Rp10.000)</span>
+</div>
+<!-- Progress bar -->
+<div class="w-full bg-surface-container-high h-2 rounded-full mt-space-sm overflow-hidden flex">
+<div class="bg-secondary h-full transition-all duration-300" id="bar-margin" style="width: 74%"></div>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center justify-between text-label-xs font-label-xs">
+<span class="text-on-surface-variant">Food Cost %:</span>
+<span class="font-data-cell font-bold text-on-secondary-container" id="kpi-food-cost">26.0%</span>
+</div>
+</div>
+</div>
+<!-- Secondary Extended Ratios Strip (Markup & Price-to-Cost PRD Sec 4 Alignment) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md mt-space-md">
+<!-- Metric 5: Markup -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<div class="w-9 h-9 rounded-lg bg-surface-container-lowest flex items-center justify-center text-secondary shadow-sm">
+<span class="material-symbols-outlined text-[20px]">percent</span>
+</div>
+<div>
+<div class="font-label-xs text-label-xs uppercase font-semibold text-on-surface-variant">Metric 05 • Markup Rasio</div>
+<div class="font-title-sm text-title-sm font-bold text-on-surface" id="kpi-markup">284.6%</div>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-xs text-label-xs text-on-surface-variant block">Formula Laba / HPP</span>
+<span class="font-data-cell text-label-xs text-on-surface font-medium">(Rp7.400 / Rp2.600)</span>
+</div>
+</div>
+<!-- Metric 6: Food Cost Benchmark -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<div class="w-9 h-9 rounded-lg bg-surface-container-lowest flex items-center justify-center text-on-tertiary-container shadow-sm">
+<span class="material-symbols-outlined text-[20px]">restaurant</span>
+</div>
+<div>
+<div class="font-label-xs text-label-xs uppercase font-semibold text-on-surface-variant">Metric 06 • Food Cost Ratio</div>
+<div class="font-title-sm text-title-sm font-bold text-on-surface" id="kpi-food-cost-strip">26.0%</div>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-xs text-label-xs text-on-tertiary-container font-semibold block">Ideal (25% - 30%)</span>
+<span class="font-data-cell text-label-xs text-on-surface-variant">HPP / Harga Jual</span>
+</div>
+</div>
+<!-- Metric 7: Price-to-Cost Ratio (PRD Section 4 Clarifier) -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<div class="w-9 h-9 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary-container shadow-sm">
+<span class="material-symbols-outlined text-[20px]">compare_arrows</span>
+</div>
+<div>
+<div class="font-label-xs text-label-xs uppercase font-semibold text-on-surface-variant">Metric 07 • Price-to-Cost Ratio</div>
+<div class="font-title-sm text-title-sm font-bold text-on-surface" id="kpi-price-to-cost">384.6% ∼ 400%</div>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-xs text-label-xs text-on-surface-variant block">PRD Sec 4 Non-Ambiguitas</span>
+<span class="font-data-cell text-label-xs text-on-surface-variant">Harga Jual / HPP</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 3: Two-Column Interactive Analysis Workspace -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg mb-space-xl">
+<!-- Left Column (5 Cols): Target Margin Calculator & Reverse Pricing & BEP -->
+<div class="lg:col-span-5 flex flex-col gap-space-lg">
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col h-full">
+<div class="flex items-center justify-between pb-space-sm mb-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[22px]">target</span>
+<div>
+<h3 class="font-title-sm text-title-sm text-on-surface">Target Margin &amp; Reverse Pricing</h3>
+<p class="font-label-xs text-label-xs text-on-surface-variant">Tentukan margin sasaran, engine menghitung harga jual optimal</p>
+</div>
+</div>
+<span class="font-label-xs text-label-xs px-2 py-0.5 bg-surface-container rounded font-bold text-on-surface">Reverse Calc</span>
+</div>
+<!-- Target Slider Control -->
+<div class="bg-surface-container-low p-space-md rounded-xl mb-space-md">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-on-surface-variant font-semibold">Target Gross Margin:</span>
+<span class="font-headline-md text-headline-md text-secondary" id="target-margin-display">75.0%</span>
+</div>
+<input class="w-full accent-secondary cursor-pointer h-2 bg-surface-container-high rounded-lg appearance-none my-space-xs" id="target-margin-slider" max="90" min="40" step="1" type="range" value="75"/>
+<!-- Preset Target Buttons -->
+<div class="flex items-center justify-between gap-2 mt-space-xs">
+<button class="flex-1 py-1 rounded text-label-xs font-label-xs bg-surface-container-lowest hover:bg-surface-container text-on-surface font-semibold transition-colors" onclick="setTargetMargin(70)">Target 70%</button>
+<button class="flex-1 py-1 rounded text-label-xs font-label-xs bg-primary-container text-surface-container-lowest font-semibold transition-colors" onclick="setTargetMargin(75)">Target 75%</button>
+<button class="flex-1 py-1 rounded text-label-xs font-label-xs bg-surface-container-lowest hover:bg-surface-container text-on-surface font-semibold transition-colors" onclick="setTargetMargin(80)">Target 80%</button>
+</div>
+</div>
+<!-- Calculated Recommended Price Quadrant -->
+<div class="space-y-space-sm mb-space-lg">
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase font-semibold">Harga Jual Teoretis (Tanpa Pembulatan):</span>
+<span class="font-data-cell text-data-cell font-bold text-on-surface" id="calc-raw-price">Rp10.400</span>
+</div>
+<div class="font-label-xs text-label-xs text-on-surface-variant">Formula: HPP / (1 − Target Margin) = Rp2.600 / (1 − 0.75)</div>
+</div>
+<!-- Smart Rounding Suggestions -->
+<div class="p-space-md rounded-xl bg-secondary-fixed/20 flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[18px]">price_change</span>
+<span class="font-title-sm text-title-sm font-bold text-on-surface">Rekomendasi Pembulatan Komersial</span>
+</div>
+<span class="font-label-xs text-label-xs text-secondary font-bold">Rekomendasi Ritel F&amp;B</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="bg-surface-container-lowest p-space-sm rounded-lg shadow-sm">
+<div class="font-label-xs text-label-xs text-on-surface-variant">Kelipatan Rp500:</div>
+<div class="font-data-cell text-title-sm font-bold text-on-surface" id="round-500">Rp10.500</div>
+<div class="font-label-xs text-label-xs text-on-tertiary-container mt-0.5">Margin Real: <span id="real-margin-500">75.2%</span></div>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded-lg shadow-sm">
+<div class="font-label-xs text-label-xs text-on-surface-variant">Kelipatan Rp1.000:</div>
+<div class="font-data-cell text-title-sm font-bold text-secondary" id="round-1000">Rp11.000</div>
+<div class="font-label-xs text-label-xs text-on-tertiary-container mt-0.5">Margin Real: <span id="real-margin-1000">76.4%</span></div>
+</div>
+</div>
+<button class="w-full py-1.5 px-space-md rounded-lg bg-secondary text-on-secondary font-body-sm text-body-sm font-semibold hover:bg-secondary/90 transition-all flex items-center justify-center gap-1" onclick="applyRecommendedPrice()">
+<span>Terapkan Rp10.500 ke Matrix Aktif</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Break Even Point (BEP) Analysis Card -->
+<div class="mt-auto p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary-container text-[20px]">balance</span>
+<span class="font-title-sm text-title-sm text-on-surface">Break-Even Point (BEP) Batch</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Untuk menutup estimasi beban overhead &amp; fixed utilities batch (<span class="font-data-cell text-on-surface font-semibold">Rp10.000</span>), Anda perlu menjual minimal:
+          </p>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-headline-md text-headline-md text-secondary" id="bep-units">2 Unit Roti</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">dari 5 unit hasil pan batch (40% Kapasitas Batch)</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden flex mt-2">
+<div class="bg-secondary-container h-full" style="width: 40%"></div>
+<div class="bg-on-tertiary-container/30 h-full flex-1"></div>
+</div>
+<div class="flex justify-between font-label-xs text-label-xs text-on-surface-variant mt-1">
+<span>2 Unit = Balik Modal</span>
+<span>3 Unit Sisa = Laba Murni (+Rp22.200)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (7 Cols): What-If Scenario & Price Shock Simulator -->
+<div class="lg:col-span-7 flex flex-col gap-space-lg">
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col h-full">
+<div class="flex items-center justify-between pb-space-sm mb-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[22px]">insights</span>
+<div>
+<h3 class="font-title-sm text-title-sm text-on-surface">What-If Scenario &amp; Price Shock Simulator</h3>
+<p class="font-label-xs text-label-xs text-on-surface-variant">Simulasi sensitivitas fluktuasi harga komoditas terhadap margin kotor</p>
+</div>
+</div>
+<span class="font-label-xs text-label-xs px-2 py-0.5 bg-error-container text-on-error-container rounded font-bold">Stress Testing</span>
+</div>
+<!-- Recipe Ingredients Baseline Card Reference -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-sm mb-space-md p-space-sm bg-surface-container-low rounded-xl">
+<div class="p-space-xs">
+<span class="font-label-xs text-label-xs text-on-surface-variant block">Tepung Terigu (600g)</span>
+<span class="font-data-cell text-body-sm font-bold text-on-surface">Rp7.200</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant block">@Rp12.000/kg</span>
+</div>
+<div class="p-space-xs">
+<span class="font-label-xs text-label-xs text-on-surface-variant block">Telur Ayam (2 btr)</span>
+<span class="font-data-cell text-body-sm font-bold text-on-surface">Rp4.000</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant block">@Rp2.000/btr</span>
+</div>
+<div class="p-space-xs">
+<span class="font-label-xs text-label-xs text-on-surface-variant block">Gula &amp; Mentega</span>
+<span class="font-data-cell text-body-sm font-bold text-on-surface">Rp1.400</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant block">50g Gula + 40g Butter</span>
+</div>
+<div class="p-space-xs">
+<span class="font-label-xs text-label-xs text-on-surface-variant block">Ragi &amp; Garam</span>
+<span class="font-data-cell text-body-sm font-bold text-on-surface">Rp400</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant block">11g Instant Yeast</span>
+</div>
+</div>
+<!-- Sliders & Preset Scenarios -->
+<div class="space-y-space-md mb-space-lg flex-1">
+<!-- Scenario 1: Tepung Terigu Shock -->
+<div class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container/60 transition-colors">
+<div class="flex items-center justify-between mb-space-xs">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-surface-container-lowest flex items-center justify-center font-bold text-label-xs text-secondary shadow-sm">1</span>
+<div>
+<span class="font-title-sm text-body-md font-semibold text-on-surface">Kenaikan Harga Tepung Terigu</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant block">Baseline: Rp12.000/kg • Komponen 55.4% dari total HPP</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-data-metric text-title-sm font-bold text-on-surface" id="flour-pct-display">+0%</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant block" id="flour-price-display">Rp12.000/kg</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md mt-space-sm">
+<input class="flex-1 accent-secondary cursor-pointer h-1.5 bg-surface-container-high rounded-lg appearance-none" id="flour-slider" max="60" min="0" step="5" type="range" value="0"/>
+<button class="px-space-sm py-1 rounded text-label-xs font-label-xs bg-surface-container-lowest hover:bg-surface-container text-on-surface font-semibold shadow-sm transition-colors whitespace-nowrap" onclick="applyFlourPreset(20)">
+                Shock +20%
+              </button>
+</div>
+</div>
+<!-- Scenario 2: Telur Ayam Shock -->
+<div class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container/60 transition-colors">
+<div class="flex items-center justify-between mb-space-xs">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-surface-container-lowest flex items-center justify-center font-bold text-label-xs text-secondary shadow-sm">2</span>
+<div>
+<span class="font-title-sm text-body-md font-semibold text-on-surface">Kenaikan Harga Telur Ayam</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant block">Baseline: Rp2.000/butir • Komponen 30.7% dari total HPP</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-data-metric text-title-sm font-bold text-on-surface" id="egg-pct-display">+0%</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant block" id="egg-price-display">Rp2.000/btr</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md mt-space-sm">
+<input class="flex-1 accent-secondary cursor-pointer h-1.5 bg-surface-container-high rounded-lg appearance-none" id="egg-slider" max="60" min="0" step="5" type="range" value="0"/>
+<button class="px-space-sm py-1 rounded text-label-xs font-label-xs bg-surface-container-lowest hover:bg-surface-container text-on-surface font-semibold shadow-sm transition-colors whitespace-nowrap" onclick="applyEggPreset(25)">
+                Shock +25%
+              </button>
+</div>
+</div>
+<!-- Combined Shock Quick Action -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm p-space-sm rounded-lg bg-surface-container-high/40">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">bolt</span>
+<span class="font-label-xs text-label-xs text-on-surface font-semibold">Preset Gabungan: Inflasi Komoditas Pangan</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-space-md py-1 rounded text-label-xs font-label-xs bg-secondary-fixed text-on-secondary-fixed font-bold hover:bg-secondary-fixed-dim transition-colors" onclick="applyCombinedShock()">
+                Tepung +20% &amp; Telur +25%
+              </button>
+<button class="px-space-sm py-1 rounded text-label-xs font-label-xs bg-surface-container-lowest text-on-surface-variant hover:text-on-surface transition-colors" onclick="resetShocks()">
+                Reset
+              </button>
+</div>
+</div>
+</div>
+<!-- Live Impact Simulator Results Panel -->
+<div class="p-space-md rounded-xl bg-surface-container-low transition-all" id="shock-results-card">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-xs text-label-xs uppercase font-bold tracking-wider text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">query_stats</span>
+              Dampak Terhadap HPP &amp; Margin Roti Pemula
+            </span>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-bold" id="shock-delta-badge">Kondisi Baseline Normal</span>
+</div>
+<div class="grid grid-cols-3 gap-space-sm text-center">
+<div class="bg-surface-container-lowest p-space-sm rounded-lg shadow-sm">
+<span class="font-label-xs text-label-xs text-on-surface-variant block">HPP Baru / Unit</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface" id="sim-hpp-unit">Rp2.600</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant block mt-0.5" id="sim-hpp-diff">+Rp0</span>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded-lg shadow-sm">
+<span class="font-label-xs text-label-xs text-on-surface-variant block">Gross Margin Baru</span>
+<span class="font-headline-md text-headline-md font-bold text-on-tertiary-container" id="sim-margin">74.0%</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant block mt-0.5" id="sim-margin-diff">Tepat Target</span>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded-lg shadow-sm">
+<span class="font-label-xs text-label-xs text-on-surface-variant block">Rekomendasi Harga Jual</span>
+<span class="font-headline-md text-headline-md font-bold text-secondary" id="sim-rec-price">Rp10.000</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant block mt-0.5">Pertahankan Margin 72%+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 4: Snapshot & Freeze Audit Action (PRD Governance Sec 5.5) -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm mb-space-xl">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg">
+<div class="flex items-start gap-space-md max-w-2xl">
+<div class="w-12 h-12 rounded-xl bg-primary-container text-surface-container-lowest flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[26px] text-tertiary-fixed">lock_clock</span>
+</div>
+<div>
+<div class="flex items-center gap-space-sm mb-1">
+<h3 class="font-title-sm text-title-sm text-on-surface">Simpan sebagai Costing Snapshot Resmi (Append-Only)</h3>
+<span class="px-2 py-0.5 rounded text-label-xs font-label-xs bg-surface-container-highest/60 text-primary-container font-bold">Audit Locked</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Sesuai tata kelola PRD Section 5.5, pembekuan snapshot bersifat <em>immutable</em> (tidak dapat diedit kembali). Versi ini mengunci seluruh nilai HPP (Rp2.600), daftar harga supplier per hari ini, dan proyeksi margin tanpa terpengaruh pergerakan pasar mendatang.
+          </p>
+<div class="flex items-center gap-space-md mt-space-sm font-label-xs text-label-xs text-on-surface-variant">
+<span>Snapshot Terakhir: <strong class="text-on-surface">v1.1-20240915</strong> (Rp2.520/unit)</span>
+<span>•</span>
+<span>Operator: <strong class="text-on-surface">Chef Ayu (Head Baker &amp; R&amp;D)</strong></span>
+</div>
+</div>
+</div>
+<!-- Action Trigger Buttons -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-sm shrink-0">
+<button class="px-space-md py-space-sm rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container font-body-sm text-body-sm font-semibold transition-all flex items-center justify-center gap-2" onclick="exportSimulationReport()" type="button">
+<span class="material-symbols-outlined text-[18px]">ios_share</span>
+<span>Ekspor PDF / Excel</span>
+</button>
+<button class="px-space-lg py-space-sm rounded-lg bg-primary-container text-surface-container-lowest hover:bg-primary transition-all font-body-sm text-body-sm font-bold flex items-center justify-center gap-2 shadow-sm" id="freeze-snapshot-btn" onclick="freezeCurrentSnapshot()" type="button">
+<span class="material-symbols-outlined text-[18px] text-tertiary-fixed">lock</span>
+<span>Kunci &amp; Simpan Snapshot (v1.2-20241024)</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Detailed Ingredient Breakdown Drawer (Collapsible Technical Ledger Table) -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden mb-space-xl">
+<div class="px-space-lg py-space-md bg-surface-container-low flex items-center justify-between cursor-pointer" onclick="toggleLedgerDetails()">
+<div class="flex items-center gap-space-md">
+<span class="material-symbols-outlined text-secondary text-[20px]">table_rows</span>
+<div>
+<h4 class="font-title-sm text-title-sm text-on-surface">Rincian Komponen Biaya Bahan Baku (Batch x1 - 5 Pcs)</h4>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Formula: Acceptance Reference Roti Pemula (Classic Loaf)</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase font-semibold">Total: Rp13.000</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] transition-transform duration-200" id="ledger-chevron">expand_less</span>
+</div>
+</div>
+<!-- The Formula Data Grid -->
+<div class="overflow-x-auto" id="ledger-table-container">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/40 font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider">
+<th class="py-space-sm px-space-lg font-semibold">Bahan Baku &amp; SKU</th>
+<th class="py-space-sm px-space-md font-semibold text-right">Kuantitas Batch</th>
+<th class="py-space-sm px-space-md font-semibold text-right">Harga Dasar Beli</th>
+<th class="py-space-sm px-space-md font-semibold text-right">Biaya Pemakaian</th>
+<th class="py-space-sm px-space-md font-semibold text-right">Proporsi HPP</th>
+<th class="py-space-sm px-space-lg font-semibold text-center">Status Scaling</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm divide-y-0">
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-space-sm px-space-lg">
+<div class="font-semibold text-on-surface">Tepung Terigu Protein Tinggi (Cakra)</div>
+<div class="font-label-xs text-label-xs text-on-surface-variant">SKU: RAW-FLR-001 • Kemasan 25kg Karung</div>
+</td>
+<td class="py-space-sm px-space-md text-right font-data-cell">600 gram</td>
+<td class="py-space-sm px-space-md text-right font-data-cell">Rp12.000 / kg</td>
+<td class="py-space-sm px-space-md text-right font-data-cell font-bold text-on-surface">Rp7.200</td>
+<td class="py-space-sm px-space-md text-right font-data-cell text-on-surface-variant">55.38%</td>
+<td class="py-space-sm px-space-lg text-center">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-label-xs font-label-xs bg-surface-container-high text-on-surface">Linear 1.0x</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-space-sm px-space-lg">
+<div class="font-semibold text-on-surface">Telur Ayam Negeri Fresh (Grade A)</div>
+<div class="font-label-xs text-label-xs text-on-surface-variant">SKU: RAW-EGG-002 • Unit: Butir (~55-60g)</div>
+</td>
+<td class="py-space-sm px-space-md text-right font-data-cell">2 butir</td>
+<td class="py-space-sm px-space-md text-right font-data-cell">Rp2.000 / butir</td>
+<td class="py-space-sm px-space-md text-right font-data-cell font-bold text-on-surface">Rp4.000</td>
+<td class="py-space-sm px-space-md text-right font-data-cell text-on-surface-variant">30.77%</td>
+<td class="py-space-sm px-space-lg text-center">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-label-xs font-label-xs bg-surface-container-high text-on-surface">Linear 1.0x</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-space-sm px-space-lg">
+<div class="font-semibold text-on-surface">Mentega / Butter Blend</div>
+<div class="font-label-xs text-label-xs text-on-surface-variant">SKU: RAW-FAT-004 • Kemasan Blok 2kg</div>
+</td>
+<td class="py-space-sm px-space-md text-right font-data-cell">40 gram</td>
+<td class="py-space-sm px-space-md text-right font-data-cell">Rp22.500 / kg</td>
+<td class="py-space-sm px-space-md text-right font-data-cell font-bold text-on-surface">Rp900</td>
+<td class="py-space-sm px-space-md text-right font-data-cell text-on-surface-variant">6.92%</td>
+<td class="py-space-sm px-space-lg text-center">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-label-xs font-label-xs bg-surface-container-high text-on-surface">Linear 1.0x</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-space-sm px-space-lg">
+<div class="font-semibold text-on-surface">Gula Pasir Kristal Putih</div>
+<div class="font-label-xs text-label-xs text-on-surface-variant">SKU: RAW-SGR-001 • Kemasan 50kg Sak</div>
+</td>
+<td class="py-space-sm px-space-md text-right font-data-cell">50 gram</td>
+<td class="py-space-sm px-space-md text-right font-data-cell">Rp10.000 / kg</td>
+<td class="py-space-sm px-space-md text-right font-data-cell font-bold text-on-surface">Rp500</td>
+<td class="py-space-sm px-space-md text-right font-data-cell text-on-surface-variant">3.85%</td>
+<td class="py-space-sm px-space-lg text-center">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-label-xs font-label-xs bg-surface-container-high text-on-surface">Linear 1.0x</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-space-sm px-space-lg">
+<div class="font-semibold text-on-surface">Ragi Instan (Instant Dry Yeast)</div>
+<div class="font-label-xs text-label-xs text-on-surface-variant">SKU: RAW-YST-001 • Saf-Instant 500g Pack</div>
+</td>
+<td class="py-space-sm px-space-md text-right font-data-cell">11 gram</td>
+<td class="py-space-sm px-space-md text-right font-data-cell">Rp27.270 / kg</td>
+<td class="py-space-sm px-space-md text-right font-data-cell font-bold text-on-surface">Rp300</td>
+<td class="py-space-sm px-space-md text-right font-data-cell text-on-surface-variant">2.31%</td>
+<td class="py-space-sm px-space-lg text-center">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-label-xs font-label-xs bg-secondary-fixed text-on-secondary-fixed font-semibold">Non-Linear 0.85x</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-space-sm px-space-lg">
+<div class="font-semibold text-on-surface">Garam Halus Beryodium</div>
+<div class="font-label-xs text-label-xs text-on-surface-variant">SKU: RAW-SLT-001 • Kemasan 500g</div>
+</td>
+<td class="py-space-sm px-space-md text-right font-data-cell">10 gram</td>
+<td class="py-space-sm px-space-md text-right font-data-cell">Rp10.000 / kg</td>
+<td class="py-space-sm px-space-md text-right font-data-cell font-bold text-on-surface">Rp100</td>
+<td class="py-space-sm px-space-md text-right font-data-cell text-on-surface-variant">0.77%</td>
+<td class="py-space-sm px-space-lg text-center">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-label-xs font-label-xs bg-surface-container-high text-on-surface">Linear 1.0x</span>
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr class="bg-surface-container-low font-data-cell text-data-cell">
+<td class="py-space-sm px-space-lg font-bold text-on-surface">Total HPP Bahan Baku Batch x1 (5 Roti)</td>
+<td class="py-space-sm px-space-md text-right font-bold text-on-surface">711 gram</td>
+<td class="py-space-sm px-space-md text-right text-on-surface-variant">—</td>
+<td class="py-space-sm px-space-md text-right font-bold text-secondary text-title-sm">Rp13.000</td>
+<td class="py-space-sm px-space-md text-right font-bold text-on-surface">100.0%</td>
+<td class="py-space-sm px-space-lg text-center font-label-xs font-bold text-on-tertiary-container">HPP/Unit = Rp2.600</td>
+</tr>
+</tfoot>
+</table>
+</div>
+</div>
+<!-- Toast Notification Modal (Hidden by Default) -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none" id="snapshot-toast">
+<div class="bg-primary-container text-surface-container-lowest px-space-lg py-space-md rounded-xl shadow-xl flex items-center gap-space-md border-l-4 border-tertiary-fixed">
+<span class="material-symbols-outlined text-[24px] text-tertiary-fixed">verified</span>
+<div>
+<div class="font-title-sm text-title-sm font-bold text-surface-container-lowest">Snapshot v1.2-20241024 Dikunci!</div>
+<div class="font-label-xs text-label-xs text-on-primary-container">Nilai HPP Rp2.600 disimpan ke Immutable Audit Log.</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Core Operational State (PRD Sec 4 & 6 Acceptance Constants)
+  let currentBatchUnits = 5;
+  let baseHppUnit = 2600;
+  let currentSellingPrice = 10000;
+  let targetMargin = 75;
+
+  let flourSurgePct = 0;
+  let eggSurgePct = 0;
+
+  // Format currency IDR
+  function formatIDR(value) {
+    return 'Rp' + Math.round(value).toLocaleString('id-ID');
+  }
+
+  // Format percent
+  function formatPct(value) {
+    return value.toFixed(1) + '%';
+  }
+
+  // Recalculate all Core Financial Matrix values
+  function recalculateMatrix() {
+    const rawFlourBatchBase = 7200;
+    const rawEggBatchBase = 4000;
+    const rawOtherBatch = 1800; // 900+500+300+100
+
+    const adjustedFlour = rawFlourBatchBase * (1 + flourSurgePct / 100);
+    const adjustedEgg = rawEggBatchBase * (1 + eggSurgePct / 100);
+    const simulatedBatchHpp = adjustedFlour + adjustedEgg + rawOtherBatch;
+    const simulatedUnitHpp = simulatedBatchHpp / currentBatchUnits;
+
+    // Active metrics based on current selling price
+    const hppBatch = simulatedBatchHpp;
+    const hppUnit = simulatedUnitHpp;
+    const grossProfitUnit = currentSellingPrice - hppUnit;
+    const grossMarginPct = (grossProfitUnit / currentSellingPrice) * 100;
+    const markupPct = (grossProfitUnit / hppUnit) * 100;
+    const foodCostPct = (hppUnit / currentSellingPrice) * 100;
+    const priceToCostRatio = (currentSellingPrice / hppUnit) * 100;
+
+    // DOM Updates - KPI Cards
+    const kpiHppUnit = document.getElementById('kpi-hpp-unit');
+    const kpiHppBatch = document.getElementById('kpi-hpp-batch');
+    const kpiPriceDisplay = document.getElementById('kpi-price-display');
+    const kpiGrossProfit = document.getElementById('kpi-gross-profit');
+    const kpiBatchProfit = document.getElementById('kpi-batch-profit');
+    const kpiGrossMargin = document.getElementById('kpi-gross-margin');
+    const kpiFoodCost = document.getElementById('kpi-food-cost');
+    const kpiFoodCostStrip = document.getElementById('kpi-food-cost-strip');
+    const kpiMarkup = document.getElementById('kpi-markup');
+    const kpiPriceToCost = document.getElementById('kpi-price-to-cost');
+    const barMargin = document.getElementById('bar-margin');
+    const marginBadge = document.getElementById('margin-status-badge');
+
+    if (kpiHppUnit) kpiHppUnit.textContent = formatIDR(hppUnit);
+    if (kpiHppBatch) kpiHppBatch.textContent = formatIDR(hppBatch);
+    if (kpiPriceDisplay) kpiPriceDisplay.textContent = formatIDR(currentSellingPrice);
+    if (kpiGrossProfit) kpiGrossProfit.textContent = formatIDR(grossProfitUnit);
+    if (kpiBatchProfit) kpiBatchProfit.textContent = formatIDR(grossProfitUnit * currentBatchUnits);
+    if (kpiGrossMargin) kpiGrossMargin.textContent = formatPct(grossMarginPct);
+    if (kpiFoodCost) kpiFoodCost.textContent = formatPct(foodCostPct);
+    if (kpiFoodCostStrip) kpiFoodCostStrip.textContent = formatPct(foodCostPct);
+    if (kpiMarkup) kpiMarkup.textContent = formatPct(markupPct);
+    if (kpiPriceToCost) kpiPriceToCost.textContent = formatPct(priceToCostRatio) + ' ~ ' + Math.round(priceToCostRatio) + '%';
+
+    if (barMargin) {
+      const clamped = Math.max(0, Math.min(100, grossMarginPct));
+      barMargin.style.width = clamped + '%';
+    }
+
+    if (marginBadge) {
+      if (grossMarginPct >= 70) {
+        marginBadge.className = 'px-2 py-0.5 rounded text-label-xs font-label-xs bg-tertiary-fixed text-on-tertiary-fixed font-bold';
+        marginBadge.textContent = 'Super Healthy';
+      } else if (grossMarginPct >= 60) {
+        marginBadge.className = 'px-2 py-0.5 rounded text-label-xs font-label-xs bg-surface-container-high text-on-surface font-bold';
+        marginBadge.textContent = 'Standar';
+      } else {
+        marginBadge.className = 'px-2 py-0.5 rounded text-label-xs font-label-xs bg-error-container text-on-error-container font-bold';
+        marginBadge.textContent = 'Di Bawah Target';
+      }
+    }
+
+    // Update Reverse Pricing Column
+    const rawPrice = hppUnit / (1 - (targetMargin / 100));
+    const round500Val = Math.ceil(rawPrice / 500) * 500;
+    const round1000Val = Math.ceil(rawPrice / 1000) * 1000;
+
+    const calcRawPrice = document.getElementById('calc-raw-price');
+    const round500 = document.getElementById('round-500');
+    const round1000 = document.getElementById('round-1000');
+    const realMargin500 = document.getElementById('real-margin-500');
+    const realMargin1000 = document.getElementById('real-margin-1000');
+
+    if (calcRawPrice) calcRawPrice.textContent = formatIDR(rawPrice);
+    if (round500) round500.textContent = formatIDR(round500Val);
+    if (round1000) round1000.textContent = formatIDR(round1000Val);
+    if (realMargin500) realMargin500.textContent = formatPct(((round500Val - hppUnit) / round500Val) * 100);
+    if (realMargin1000) realMargin1000.textContent = formatPct(((round1000Val - hppUnit) / round1000Val) * 100);
+
+    // Update BEP units
+    const fixedOverhead = 10000;
+    const contributionMarginUnit = currentSellingPrice - hppUnit;
+    const bepQty = contributionMarginUnit > 0 ? Math.ceil(fixedOverhead / contributionMarginUnit) : 'N/A';
+    const bepElem = document.getElementById('bep-units');
+    if (bepElem) bepElem.textContent = bepQty + ' Unit Roti';
+
+    // Update Shock Simulation Panel
+    const simHppUnitElem = document.getElementById('sim-hpp-unit');
+    const simHppDiffElem = document.getElementById('sim-hpp-diff');
+    const simMarginElem = document.getElementById('sim-margin');
+    const simMarginDiffElem = document.getElementById('sim-margin-diff');
+    const simRecPriceElem = document.getElementById('sim-rec-price');
+    const shockDeltaBadge = document.getElementById('shock-delta-badge');
+
+    if (simHppUnitElem) simHppUnitElem.textContent = formatIDR(simulatedUnitHpp);
+
+    const diffHpp = simulatedUnitHpp - baseHppUnit;
+    if (simHppDiffElem) {
+      simHppDiffElem.textContent = diffHpp > 0 ? '+' + formatIDR(diffHpp) + '/roti' : '+Rp0';
+      simHppDiffElem.className = diffHpp > 0 ? 'font-label-xs text-label-xs text-error font-bold block mt-0.5' : 'font-label-xs text-label-xs text-on-surface-variant block mt-0.5';
+    }
+
+    if (simMarginElem) simMarginElem.textContent = formatPct(grossMarginPct);
+    if (simMarginDiffElem) {
+      if (diffHpp > 0) {
+        simMarginDiffElem.textContent = 'Turun ' + (74.0 - grossMarginPct).toFixed(1) + '%';
+        simMarginDiffElem.className = 'font-label-xs text-label-xs text-error font-semibold block mt-0.5';
+      } else {
+        simMarginDiffElem.textContent = 'Tepat Target Normal';
+        simMarginDiffElem.className = 'font-label-xs text-label-xs text-on-surface-variant block mt-0.5';
+      }
+    }
+
+    // Recommendation if shocked: maintain at least 72% margin
+    const targetMaintainMargin = 0.724;
+    const suggestedPrice = Math.ceil((simulatedUnitHpp / (1 - targetMaintainMargin)) / 500) * 500;
+    if (simRecPriceElem) simRecPriceElem.textContent = formatIDR(suggestedPrice);
+
+    if (shockDeltaBadge) {
+      if (diffHpp > 0) {
+        shockDeltaBadge.textContent = 'Simulasi Shock Aktif';
+        shockDeltaBadge.className = 'font-label-xs text-label-xs px-2 py-0.5 rounded bg-error-container text-on-error-container font-bold';
+      } else {
+        shockDeltaBadge.textContent = 'Kondisi Baseline Normal';
+        shockDeltaBadge.className = 'font-label-xs text-label-xs px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-bold';
+      }
+    }
+  }
+
+  // Interactive controls
+  function setSellingPrice(price) {
+    currentSellingPrice = price;
+    const slider = document.getElementById('price-slider');
+    if (slider) slider.value = price;
+    recalculateMatrix();
+  }
+
+  function setTargetMargin(pct) {
+    targetMargin = pct;
+    const slider = document.getElementById('target-margin-slider');
+    const display = document.getElementById('target-margin-display');
+    if (slider) slider.value = pct;
+    if (display) display.textContent = pct.toFixed(1) + '%';
+    recalculateMatrix();
+  }
+
+  function applyRecommendedPrice() {
+    setSellingPrice(10500);
+  }
+
+  function applyFlourPreset(pct) {
+    flourSurgePct = pct;
+    const slider = document.getElementById('flour-slider');
+    const pctDisp = document.getElementById('flour-pct-display');
+    const priceDisp = document.getElementById('flour-price-display');
+    if (slider) slider.value = pct;
+    if (pctDisp) pctDisp.textContent = '+' + pct + '%';
+    if (priceDisp) priceDisp.textContent = formatIDR(12000 * (1 + pct / 100)) + '/kg';
+    recalculateMatrix();
+  }
+
+  function applyEggPreset(pct) {
+    eggSurgePct = pct;
+    const slider = document.getElementById('egg-slider');
+    const pctDisp = document.getElementById('egg-pct-display');
+    const priceDisp = document.getElementById('egg-price-display');
+    if (slider) slider.value = pct;
+    if (pctDisp) pctDisp.textContent = '+' + pct + '%';
+    if (priceDisp) priceDisp.textContent = formatIDR(2000 * (1 + pct / 100)) + '/btr';
+    recalculateMatrix();
+  }
+
+  function applyCombinedShock() {
+    applyFlourPreset(20);
+    applyEggPreset(25);
+  }
+
+  function resetShocks() {
+    applyFlourPreset(0);
+    applyEggPreset(0);
+  }
+
+  function toggleLedgerDetails() {
+    const table = document.getElementById('ledger-table-container');
+    const icon = document.getElementById('ledger-chevron');
+    if (table.classList.contains('hidden')) {
+      table.classList.remove('hidden');
+      icon.textContent = 'expand_less';
+    } else {
+      table.classList.add('hidden');
+      icon.textContent = 'expand_more';
+    }
+  }
+
+  function freezeCurrentSnapshot() {
+    const toast = document.getElementById('snapshot-toast');
+    toast.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    setTimeout(() => {
+      toast.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+      toast.classList.remove('translate-y-0', 'opacity-100');
+    }, 4000);
+  }
+
+  function exportSimulationReport() {
+    alert("Ekspor Lembar Simulasi HPP Roti Pemula (Classic Loaf) ke format PDF / Standar Akuntansi F&B sedang diproses...");
+  }
+
+  // Event Listeners Initialization
+  document.addEventListener('DOMContentLoaded', () => {
+    // Price Slider
+    const priceSlider = document.getElementById('price-slider');
+    if (priceSlider) {
+      priceSlider.addEventListener('input', (e) => {
+        currentSellingPrice = parseInt(e.target.value);
+        recalculateMatrix();
+      });
+    }
+
+    // Target Margin Slider
+    const targetSlider = document.getElementById('target-margin-slider');
+    if (targetSlider) {
+      targetSlider.addEventListener('input', (e) => {
+        targetMargin = parseFloat(e.target.value);
+        const display = document.getElementById('target-margin-display');
+        if (display) display.textContent = targetMargin.toFixed(1) + '%';
+        recalculateMatrix();
+      });
+    }
+
+    // Flour Slider
+    const flourSlider = document.getElementById('flour-slider');
+    if (flourSlider) {
+      flourSlider.addEventListener('input', (e) => {
+        flourSurgePct = parseInt(e.target.value);
+        const pctDisp = document.getElementById('flour-pct-display');
+        const priceDisp = document.getElementById('flour-price-display');
+        if (pctDisp) pctDisp.textContent = '+' + flourSurgePct + '%';
+        if (priceDisp) priceDisp.textContent = formatIDR(12000 * (1 + flourSurgePct / 100)) + '/kg';
+        recalculateMatrix();
+      });
+    }
+
+    // Egg Slider
+    const eggSlider = document.getElementById('egg-slider');
+    if (eggSlider) {
+      eggSlider.addEventListener('input', (e) => {
+        eggSurgePct = parseInt(e.target.value);
+        const pctDisp = document.getElementById('egg-pct-display');
+        const priceDisp = document.getElementById('egg-price-display');
+        if (pctDisp) pctDisp.textContent = '+' + eggSurgePct + '%';
+        if (priceDisp) priceDisp.textContent = formatIDR(2000 * (1 + eggSurgePct / 100)) + '/btr';
+        recalculateMatrix();
+      });
+    }
+
+    // Batch buttons
+    const batchBtn1 = document.getElementById('batch-btn-1');
+    const batchBtn2 = document.getElementById('batch-btn-2');
+    if (batchBtn1 && batchBtn2) {
+      batchBtn1.addEventListener('click', () => {
+        batchBtn1.className = 'px-space-md py-1.5 rounded bg-surface-container-lowest font-bold text-on-surface shadow-sm transition-all';
+        batchBtn2.className = 'px-space-md py-1.5 rounded text-on-surface-variant hover:text-on-surface transition-all';
+        currentBatchUnits = 5;
+        recalculateMatrix();
+      });
+      batchBtn2.addEventListener('click', () => {
+        batchBtn2.className = 'px-space-md py-1.5 rounded bg-surface-container-lowest font-bold text-on-surface shadow-sm transition-all';
+        batchBtn1.className = 'px-space-md py-1.5 rounded text-on-surface-variant hover:text-on-surface transition-all';
+        currentBatchUnits = 10;
+        recalculateMatrix();
+      });
+    }
+
+    // Initial Calculate
+    recalculateMatrix();
+  });
+</script></main></div></body></html>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="UFC">
+  <rect width="512" height="512" rx="112" fill="#0b1324"/>
+  <rect x="64" y="64" width="384" height="384" rx="84" fill="#d97706"/>
+  <path d="M150 178v116c0 52 40 82 106 82s106-30 106-82V178h-54v112c0 30-18 46-52 46s-52-16-52-46V178h-54Z" fill="#0b1324"/>
+  <path d="M356 178h-58v54h58c14 0 22 8 22 20s-8 20-22 20h-58v54h58c44 0 76-30 76-74s-32-74-76-74Z" fill="#0b1324" opacity=".8"/>
+</svg>

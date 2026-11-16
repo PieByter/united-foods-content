@@ -1,0 +1,27 @@
+# dependencies
+node_modules
+.pnp
+.pnp.*
+
+# next.js
+.next/
+out/
+build/
+
+# production
+dist
+
+# local data & secrets
+.env
+.env.local
+.env.*.local
+.data/
+*.log
+
+# testing
+coverage
+
+# misc
+.DS_Store
+Thumbs.db
+*.tsbuildinfo
