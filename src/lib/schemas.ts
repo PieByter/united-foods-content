@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { normalizeVideoUrl, VIDEO_PLATFORMS } from "@/lib/video";
 
 const requiredText = (label: string, min = 1) =>
   z
@@ -80,6 +81,51 @@ export const recipePayloadSchema = z.object({
   yieldLossPct: decimalString("Yield loss").nullish(),
   notes: z.string().trim().max(500).nullish(),
   items: z.array(recipeItemSchema).min(1, "Tambahkan minimal satu item formula."),
+});
+
+const requiredVideoUrl = z
+  .string()
+  .trim()
+  .min(1, "URL video wajib diisi.")
+  .max(1000, "URL video terlalu panjang.")
+  .refine((value) => normalizeVideoUrl(value) !== null, "URL video harus berupa tautan http/https yang valid.")
+  .transform((value) => normalizeVideoUrl(value) ?? value);
+
+const optionalExternalUrl = z
+  .string()
+  .trim()
+  .max(1000, "URL terlalu panjang.")
+  .optional()
+  .nullable()
+  .refine(
+    (value) => !value || normalizeVideoUrl(value) !== null,
+    "URL harus berupa tautan http/https yang valid.",
+  )
+  .transform((value) => (value ? normalizeVideoUrl(value) : null));
+
+export const tutorialStepSchema = z.object({
+  instruction: z
+    .string()
+    .trim()
+    .min(3, "Instruksi langkah minimal 3 karakter.")
+    .max(2000, "Instruksi langkah maksimal 2000 karakter."),
+  durationSec: z.number().int().min(0).max(86_400).nullish(),
+});
+
+export const tutorialVideoSchema = z.object({
+  url: requiredVideoUrl,
+  title: z.string().trim().max(180, "Judul video maksimal 180 karakter.").nullish(),
+  description: z.string().trim().max(800, "Deskripsi video maksimal 800 karakter.").nullish(),
+  platform: z.enum(VIDEO_PLATFORMS).optional(),
+  thumbnailUrl: optionalExternalUrl,
+  durationSec: z.number().int().min(0).max(86_400).nullish(),
+  authorName: z.string().trim().max(120, "Nama channel maksimal 120 karakter.").nullish(),
+  source: z.enum(["manual", "ai"]).default("manual"),
+});
+
+export const recipeTutorialPayloadSchema = z.object({
+  steps: z.array(tutorialStepSchema).max(40, "Maksimal 40 langkah tutorial.").default([]),
+  videos: z.array(tutorialVideoSchema).max(12, "Maksimal 12 video per resep.").default([]),
 });
 
 export const settingsSchema = z.object({

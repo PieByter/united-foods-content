@@ -51,6 +51,29 @@ export interface RecipeItemView {
   sortOrder: number;
 }
 
+export type VideoPlatform = "youtube" | "vimeo" | "instagram" | "tiktok" | "other";
+
+export interface RecipeStepView {
+  id: string;
+  stepNo: number;
+  instruction: string;
+  durationSec: number | null;
+}
+
+export interface RecipeVideoView {
+  id: string;
+  recipeId: string;
+  url: string;
+  title: string | null;
+  description: string | null;
+  platform: VideoPlatform;
+  thumbnailUrl: string | null;
+  durationSec: number | null;
+  authorName: string | null;
+  source: "manual" | "ai";
+  sortOrder: number;
+}
+
 export interface RecipeVersionView {
   id: string;
   versionNo: number;
@@ -62,6 +85,7 @@ export interface RecipeVersionView {
   createdBy: string;
   createdAt: string;
   items: RecipeItemView[];
+  steps: RecipeStepView[];
 }
 
 export interface RecipeView {
@@ -80,6 +104,7 @@ export interface RecipeView {
   updatedAt: string;
   version: RecipeVersionView | null;
   versionCount: number;
+  videos: RecipeVideoView[];
 }
 
 export interface SettingsView {

@@ -31,6 +31,7 @@ import { calculateForRecipe } from "@/server/costing-service";
 import { Badge } from "@/components/ui/badge";
 import { Button, ButtonLink } from "@/components/ui/button";
 import { RecipeStatusBadge, RecipeThumb } from "@/components/recipe-bits";
+import { RecipeTutorialPanel } from "@/components/recipes/recipe-tutorial";
 
 function formatFactor(value: string): string {
   try {
@@ -660,6 +661,16 @@ export function RecipeStudio({
             Lanjut ke Margin &amp; Pricing Simulator
           </ButtonLink>
         </aside>
+      </div>
+
+      <div className="mt-3">
+        <RecipeTutorialPanel
+          recipeId={recipe.id}
+          recipeName={recipe.name}
+          versionNo={version.versionNo}
+          steps={version.steps}
+          videos={recipe.videos}
+        />
       </div>
     </div>
   );

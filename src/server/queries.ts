@@ -9,6 +9,8 @@ import type {
   PriceAlert,
   PriceView,
   RecipeItemView,
+  RecipeStepView,
+  RecipeVideoView,
   RecipeView,
   RecipeVersionView,
   ScenarioView,
@@ -159,7 +161,36 @@ function mapItem(row: typeof schema.recipeItem.$inferSelect): RecipeItemView {
   };
 }
 
-function mapVersion(row: typeof schema.recipeVersion.$inferSelect, items: RecipeItemView[]): RecipeVersionView {
+function mapStep(row: typeof schema.recipeStep.$inferSelect): RecipeStepView {
+  return {
+    id: row.id,
+    stepNo: row.stepNo,
+    instruction: row.instruction,
+    durationSec: row.durationSec,
+  };
+}
+
+function mapVideo(row: typeof schema.recipeVideo.$inferSelect): RecipeVideoView {
+  return {
+    id: row.id,
+    recipeId: row.recipeId,
+    url: row.url,
+    title: row.title,
+    description: row.description,
+    platform: row.platform,
+    thumbnailUrl: row.thumbnailUrl,
+    durationSec: row.durationSec,
+    authorName: row.authorName,
+    source: row.source,
+    sortOrder: row.sortOrder,
+  };
+}
+
+function mapVersion(
+  row: typeof schema.recipeVersion.$inferSelect,
+  items: RecipeItemView[],
+  steps: RecipeStepView[],
+): RecipeVersionView {
   return {
     id: row.id,
     versionNo: row.versionNo,
@@ -171,6 +202,7 @@ function mapVersion(row: typeof schema.recipeVersion.$inferSelect, items: Recipe
     createdBy: row.createdBy,
     createdAt: iso(row.createdAt)!,
     items,
+    steps,
   };
 }
 
@@ -199,6 +231,19 @@ export async function getRecipes(options: { includeArchived?: boolean } = {}): P
           .where(inArray(schema.recipeItem.recipeVersionId, versionIds))
           .orderBy(schema.recipeItem.sortOrder)
       : [];
+  const stepRows =
+    versionIds.length > 0
+      ? await db
+          .select()
+          .from(schema.recipeStep)
+          .where(inArray(schema.recipeStep.recipeVersionId, versionIds))
+          .orderBy(schema.recipeStep.stepNo)
+      : [];
+  const videoRows = await db
+    .select()
+    .from(schema.recipeVideo)
+    .where(inArray(schema.recipeVideo.recipeId, recipeIds))
+    .orderBy(schema.recipeVideo.sortOrder, schema.recipeVideo.createdAt);
 
   const itemMap = new Map<string, RecipeItemView[]>();
   for (const row of itemRows) {
@@ -207,10 +252,24 @@ export async function getRecipes(options: { includeArchived?: boolean } = {}): P
     itemMap.set(row.recipeVersionId, list);
   }
 
+  const stepMap = new Map<string, RecipeStepView[]>();
+  for (const row of stepRows) {
+    const list = stepMap.get(row.recipeVersionId) ?? [];
+    list.push(mapStep(row));
+    stepMap.set(row.recipeVersionId, list);
+  }
+
+  const videoMap = new Map<string, RecipeVideoView[]>();
+  for (const row of videoRows) {
+    const list = videoMap.get(row.recipeId) ?? [];
+    list.push(mapVideo(row));
+    videoMap.set(row.recipeId, list);
+  }
+
   const versionMap = new Map<string, RecipeVersionView[]>();
   for (const row of versionRows) {
     const list = versionMap.get(row.recipeId) ?? [];
-    list.push(mapVersion(row, itemMap.get(row.id) ?? []));
+    list.push(mapVersion(row, itemMap.get(row.id) ?? [], stepMap.get(row.id) ?? []));
     versionMap.set(row.recipeId, list);
   }
 
@@ -233,6 +292,7 @@ export async function getRecipes(options: { includeArchived?: boolean } = {}): P
       updatedAt: iso(row.updatedAt)!,
       version: current,
       versionCount: versions.length,
+      videos: videoMap.get(row.id) ?? [],
     };
   });
 }
@@ -256,13 +316,24 @@ export async function getRecipeVersions(recipeId: string): Promise<RecipeVersion
     .from(schema.recipeItem)
     .where(inArray(schema.recipeItem.recipeVersionId, versionIds))
     .orderBy(schema.recipeItem.sortOrder);
+  const steps = await db
+    .select()
+    .from(schema.recipeStep)
+    .where(inArray(schema.recipeStep.recipeVersionId, versionIds))
+    .orderBy(schema.recipeStep.stepNo);
   const map = new Map<string, RecipeItemView[]>();
   for (const item of items) {
     const list = map.get(item.recipeVersionId) ?? [];
     list.push(mapItem(item));
     map.set(item.recipeVersionId, list);
   }
-  return versions.map((version) => mapVersion(version, map.get(version.id) ?? []));
+  const stepMap = new Map<string, RecipeStepView[]>();
+  for (const step of steps) {
+    const list = stepMap.get(step.recipeVersionId) ?? [];
+    list.push(mapStep(step));
+    stepMap.set(step.recipeVersionId, list);
+  }
+  return versions.map((version) => mapVersion(version, map.get(version.id) ?? [], stepMap.get(version.id) ?? []));
 }
 
 export interface UsageInfo {

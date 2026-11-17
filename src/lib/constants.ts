@@ -84,6 +84,7 @@ export const AUDIT_ACTION_LABEL: Record<string, string> = {
   "recipe.created": "Resep dibuat",
   "recipe.updated": "Versi resep baru",
   "recipe.published": "Resep dipublikasikan",
+  "recipe.tutorial.updated": "Tutorial resep diperbarui",
   "snapshot.created": "Snapshot HPP disimpan",
   "settings.updated": "Pengaturan diperbarui",
   "demo.seeded": "Data contoh dimuat",

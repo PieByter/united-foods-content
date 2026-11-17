@@ -9,6 +9,7 @@ import {
 } from "@ufc/costing";
 import * as schema from "../src/server/db/schema";
 import type { AppDb } from "../src/server/db/client";
+import { detectVideoPlatform, normalizeVideoUrl, youtubeThumbnail } from "../src/lib/video";
 
 const SEED_OWNER_ID = "00000000-0000-0000-0000-000000000001";
 const ACTOR = "Chef Ayu";
@@ -239,6 +240,18 @@ interface SeedItem {
   overheadValue?: string;
 }
 
+interface SeedStep {
+  instruction: string;
+  durationMin?: number;
+}
+
+interface SeedVideo {
+  url: string;
+  title: string;
+  description?: string;
+  authorName?: string;
+}
+
 interface SeedRecipe {
   key: string;
   name: string;
@@ -254,6 +267,8 @@ interface SeedRecipe {
   yieldLossPct: string;
   sellingPrice?: string;
   previousVersions?: number;
+  steps?: SeedStep[];
+  videos?: SeedVideo[];
   items: SeedItem[];
 }
 
@@ -285,6 +300,28 @@ const RECIPES: SeedRecipe[] = [
         note: "Larutkan dengan air hangat 35°C",
       },
     ],
+    steps: [
+      { instruction: "Campur tepung protein tinggi, gula, dan ragi. Aduk rata di mangkuk mixer.", durationMin: 5 },
+      { instruction: "Masukkan telur dan air bertahap, mix kecepatan rendah sampai adonan menyatu.", durationMin: 8 },
+      { instruction: "Tambahkan garam dan butter, lanjutkan kneading sampai adonan lolos windowpane test.", durationMin: 12 },
+      { instruction: "Bulk fermentation di suhu 28°C selama 60 menit sampai mengembang dua kali lipat.", durationMin: 60 },
+      { instruction: "Punch down, bagi adonan 100 gr, rounding, lalu rest 15 menit sebelum shaping.", durationMin: 15 },
+      { instruction: "Shape loaf, proofing 45 menit, lalu bake di 180°C selama 25–30 menit.", durationMin: 30 },
+    ],
+    videos: [
+      {
+        url: "https://www.youtube.com/results?search_query=roti+pemula+classic+loaf+tutorial",
+        title: "Referensi teknik dasar roti pemula",
+        description: "Contoh tautan demo: kneading, proofing, dan shaping loaf. Ganti dengan video internal produksi.",
+        authorName: "YouTube · demo",
+      },
+      {
+        url: "https://www.youtube.com/results?search_query=windowpane+test+dough",
+        title: "Cara membaca windowpane test",
+        description: "Contoh referensi untuk memastikan gluten sudah cukup berkembang sebelum fermentasi.",
+        authorName: "YouTube · demo",
+      },
+    ],
   },
   {
     key: "croissant-butter",
@@ -312,6 +349,28 @@ const RECIPES: SeedRecipe[] = [
       { type: "overhead", label: "Kemasan Primer & Food Grade Box", overheadKind: "fixed", overheadValue: "3000", qty: "0", unit: "batch" },
       { type: "overhead", label: "Utilitas & Gas Deck Oven", overheadKind: "fixed", overheadValue: "2000", qty: "0", unit: "batch" },
     ],
+    steps: [
+      { instruction: "Campur tepung, gula, ragi, susu, dan telur hingga adonan kalis.", durationMin: 10 },
+      { instruction: "Bungkus adonan dan resting di chiller selama 30 menit.", durationMin: 30 },
+      { instruction: "Pipihkan butter AOP menjadi block 20x20 cm, lalu bungkus dengan adonan.", durationMin: 15 },
+      { instruction: "Lakukan 3-fold lamination dengan resting 30 menit di antara lipatan.", durationMin: 90 },
+      { instruction: "Rolling, potong segitiga, shape croissant, lalu proofing 26°C selama 90 menit.", durationMin: 90 },
+      { instruction: "Egg wash dan bake di 190°C selama 18–20 menit sampai golden brown.", durationMin: 20 },
+    ],
+    videos: [
+      {
+        url: "https://www.youtube.com/results?search_query=croissant+laminasi+butter+tutorial",
+        title: "Teknik laminasi croissant",
+        description: "Contoh referensi demo untuk butter block, folding, dan resting adonan.",
+        authorName: "YouTube · demo",
+      },
+      {
+        url: "https://www.youtube.com/results?search_query=croissant+shaping+technique",
+        title: "Shaping croissant yang konsisten",
+        description: "Contoh referensi demo untuk memotong segitiga dan membentuk croissant.",
+        authorName: "YouTube · demo",
+      },
+    ],
   },
   {
     key: "donat-kentang",
@@ -336,6 +395,20 @@ const RECIPES: SeedRecipe[] = [
       { type: "ingredient", ref: "sugar", qty: "30", unit: "gr" },
       { type: "overhead", label: "Kemasan Bio Box", overheadKind: "fixed", overheadValue: "4000", qty: "0", unit: "batch" },
     ],
+    steps: [
+      { instruction: "Siapkan adonan dasar donat dari chiller, timbang 900 gr untuk satu batch.", durationMin: 5 },
+      { instruction: "Rolling adonan setebal 1,5 cm, cetak ring, lalu proofing 30 menit.", durationMin: 30 },
+      { instruction: "Goreng di suhu 170°C selama 1 menit per sisi sampai golden.", durationMin: 6 },
+      { instruction: "Glaze dengan cokelat compound, resting 10 menit sebelum packing.", durationMin: 10 },
+    ],
+    videos: [
+      {
+        url: "https://www.youtube.com/results?search_query=donat+kentang+glaze+tutorial",
+        title: "Donat kentang lembut dan glaze",
+        description: "Contoh referensi demo untuk proofing, frying, dan finishing glaze.",
+        authorName: "YouTube · demo",
+      },
+    ],
   },
   {
     key: "baguette-artisan",
@@ -359,6 +432,22 @@ const RECIPES: SeedRecipe[] = [
       { type: "ingredient", ref: "yeast", qty: "1", unit: "bungkus", nonLinearScaling: true },
       { type: "overhead", label: "Utilitas Deck Oven & Steam", overheadKind: "fixed", overheadValue: "2500", qty: "0", unit: "batch" },
       { type: "overhead", label: "Kemasan Paper Bag", overheadKind: "fixed", overheadValue: "1500", qty: "0", unit: "batch" },
+    ],
+    steps: [
+      { instruction: "Autolyse tepung dan air selama 30 menit sampai hidrasi merata.", durationMin: 30 },
+      { instruction: "Tambahkan ragi dan salt, mix sampai adonan kalis dan windowpane.", durationMin: 12 },
+      { instruction: "Bulk fermentation 2 jam dengan 3 kali fold setiap 30 menit.", durationMin: 120 },
+      { instruction: "Divide 250 gr, pre-shape, lalu rest 20 menit.", durationMin: 20 },
+      { instruction: "Final shape baguette dan cold retard 18 jam di chiller.", durationMin: 1080 },
+      { instruction: "Score, masukkan ke oven 250°C dengan steam, bake 20 menit.", durationMin: 20 },
+    ],
+    videos: [
+      {
+        url: "https://www.youtube.com/results?search_query=baguette+artisan+scoring+tutorial",
+        title: "Scoring dan open crumb baguette",
+        description: "Contoh referensi demo untuk sudut scoring, steam, dan kontrol crust.",
+        authorName: "YouTube · demo",
+      },
     ],
   },
   {
@@ -386,6 +475,22 @@ const RECIPES: SeedRecipe[] = [
       { type: "ingredient", ref: "salt", qty: "12", unit: "gr" },
       { type: "overhead", label: "Kemasan Burger Box", overheadKind: "fixed", overheadValue: "6000", qty: "0", unit: "batch" },
     ],
+    steps: [
+      { instruction: "Buat tangzhong dari tepung dan susu, masak sampai membentuk pasta.", durationMin: 10 },
+      { instruction: "Mix tepung, ragi, telur, gula, dan tangzhong sampai adonan menyatu.", durationMin: 10 },
+      { instruction: "Masukkan butter bertahap, lanjutkan kneading sampai elastis.", durationMin: 15 },
+      { instruction: "Bulk fermentation 60 menit hingga mengembang dua kali lipat.", durationMin: 60 },
+      { instruction: "Bagi adonan 80 gr, rounding, lalu proofing 45 menit.", durationMin: 45 },
+      { instruction: "Egg wash dua lapis dan bake di 180°C selama 15 menit.", durationMin: 15 },
+    ],
+    videos: [
+      {
+        url: "https://www.youtube.com/results?search_query=brioche+burger+bun+tutorial",
+        title: "Brioche bun lembut untuk burger",
+        description: "Contoh referensi demo untuk tangzhong, proofing, dan egg wash.",
+        authorName: "YouTube · demo",
+      },
+    ],
   },
   {
     key: "nastar-keju",
@@ -410,6 +515,21 @@ const RECIPES: SeedRecipe[] = [
       { type: "ingredient", ref: "milk-powder", qty: "20", unit: "gr" },
       { type: "overhead", label: "Kemasan Toples & Food Grade", overheadKind: "fixed", overheadValue: "5000", qty: "0", unit: "batch" },
       { type: "overhead", label: "Alokasi Gas Oven", overheadKind: "percent", overheadValue: "5", qty: "0", unit: "%" },
+    ],
+    steps: [
+      { instruction: "Kocok butter dan gula sampai creamy dan mengembang.", durationMin: 8 },
+      { instruction: "Masukkan kuning telur satu per satu, aduk rata.", durationMin: 5 },
+      { instruction: "Tambahkan tepung dan susu bubuk, aduk sampai adonan bisa dibentuk.", durationMin: 10 },
+      { instruction: "Bentuk bulat, isi selai nanas, dan beri topping keju.", durationMin: 25 },
+      { instruction: "Bake di 160°C selama 20 menit, dinginkan sebelum packing.", durationMin: 20 },
+    ],
+    videos: [
+      {
+        url: "https://www.youtube.com/results?search_query=nastar+keju+tutorial",
+        title: "Nastar keju lumer dan renyah",
+        description: "Contoh referensi demo untuk adonan, filling nanas, dan topping keju.",
+        authorName: "YouTube · demo",
+      },
     ],
   },
   {
@@ -436,6 +556,21 @@ const RECIPES: SeedRecipe[] = [
       { type: "ingredient", ref: "vanilla", qty: "5", unit: "ml" },
       { type: "overhead", label: "Kemasan Slice Box", overheadKind: "fixed", overheadValue: "2500", qty: "0", unit: "batch" },
     ],
+    steps: [
+      { instruction: "Kocok telur dan gula sampai mengembang dan pucat.", durationMin: 10 },
+      { instruction: "Masukkan tepung, baking powder, dan vanili secara bertahap.", durationMin: 8 },
+      { instruction: "Lelehkan butter, campur dengan susu, lalu fold ke adonan.", durationMin: 8 },
+      { instruction: "Tuang ke loyang dan bake di 170°C selama 30 menit.", durationMin: 30 },
+      { instruction: "Dinginkan, potong, dan packing setelah suhu ruang.", durationMin: 15 },
+    ],
+    videos: [
+      {
+        url: "https://www.youtube.com/results?search_query=bolu+pandan+panggang+tutorial",
+        title: "Bolu pandan panggang lembut",
+        description: "Contoh referensi demo untuk teknik fold dan kontrol suhu oven.",
+        authorName: "YouTube · demo",
+      },
+    ],
   },
   {
     key: "adonan-donat",
@@ -460,6 +595,20 @@ const RECIPES: SeedRecipe[] = [
       { type: "ingredient", ref: "yeast", qty: "1", unit: "bungkus", nonLinearScaling: true },
       { type: "ingredient", ref: "salt", qty: "5", unit: "gr" },
     ],
+    steps: [
+      { instruction: "Kukus kentang, haluskan, lalu dinginkan sebelum dipakai.", durationMin: 20 },
+      { instruction: "Mix tepung, gula, ragi, telur, kentang, dan susu sampai kalis.", durationMin: 12 },
+      { instruction: "Masukkan butter dan garam, lanjutkan kneading sampai elastis.", durationMin: 10 },
+      { instruction: "Bulk fermentation 60 menit, lalu simpan di chiller untuk batch berikutnya.", durationMin: 60 },
+    ],
+    videos: [
+      {
+        url: "https://www.youtube.com/results?search_query=adonan+dasar+donat+kentang",
+        title: "Adonan dasar donat kentang",
+        description: "Contoh referensi demo untuk tekstur adonan dan fermentasi.",
+        authorName: "YouTube · demo",
+      },
+    ],
   },
 ];
 
@@ -469,6 +618,7 @@ function daysAgo(days: number, hours = 0): Date {
 
 async function clearAll(db: AppDb): Promise<void> {
   await db.delete(schema.recipeTag);
+  await db.delete(schema.recipeVideo);
   await db.delete(schema.recipeStep);
   await db.delete(schema.media);
   await db.delete(schema.pricingScenario);
@@ -638,6 +788,40 @@ export async function seedDatabase(
             note: item.note ?? null,
             overheadKind: item.overheadKind ?? null,
             overheadValue: item.overheadValue ? new Decimal(item.overheadValue).toFixed(6) : null,
+            sortOrder: index,
+          };
+        }),
+      );
+
+      if (versionNo === previous + 1 && entry.steps?.length) {
+        await db.insert(schema.recipeStep).values(
+          entry.steps.map((step, index) => ({
+            ownerId: OWNER_ID,
+            recipeVersionId: version[0].id,
+            stepNo: index + 1,
+            instruction: step.instruction,
+            durationSec: step.durationMin ? Math.round(step.durationMin * 60) : null,
+          })),
+        );
+      }
+    }
+
+    if (entry.videos?.length) {
+      await db.insert(schema.recipeVideo).values(
+        entry.videos.map((video, index) => {
+          const url = normalizeVideoUrl(video.url);
+          if (!url) throw new Error(`Seed error: URL video tidak valid pada ${entry.key}.`);
+          const platform = detectVideoPlatform(url);
+          return {
+            ownerId: OWNER_ID,
+            recipeId: id,
+            url,
+            title: video.title,
+            description: video.description ?? null,
+            platform,
+            thumbnailUrl: youtubeThumbnail(url),
+            authorName: video.authorName ?? null,
+            source: "manual" as const,
             sortOrder: index,
           };
         }),

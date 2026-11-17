@@ -22,6 +22,8 @@ export const RECIPE_STATUSES = ["draft", "published"] as const;
 export const RECIPE_ITEM_TYPES = ["ingredient", "subrecipe", "overhead"] as const;
 export const ROUNDING_MODES = ["none", "half", "whole"] as const;
 export const OVERHEAD_KINDS = ["fixed", "percent"] as const;
+export const RECIPE_VIDEO_PLATFORMS = ["youtube", "vimeo", "instagram", "tiktok", "other"] as const;
+export const RECIPE_VIDEO_SOURCES = ["manual", "ai"] as const;
 
 export type UnitDimension = (typeof UNIT_DIMENSIONS)[number];
 export type PriceStrategy = (typeof PRICE_STRATEGIES)[number];
@@ -29,6 +31,8 @@ export type RecipeStatus = (typeof RECIPE_STATUSES)[number];
 export type RecipeItemType = (typeof RECIPE_ITEM_TYPES)[number];
 export type RoundingMode = (typeof ROUNDING_MODES)[number];
 export type OverheadKind = (typeof OVERHEAD_KINDS)[number];
+export type RecipeVideoPlatform = (typeof RECIPE_VIDEO_PLATFORMS)[number];
+export type RecipeVideoSource = (typeof RECIPE_VIDEO_SOURCES)[number];
 
 const money = (name: string) => numeric(name, { precision: 18, scale: 6 });
 const decimal = (name: string) => numeric(name, { precision: 18, scale: 6 });
@@ -312,6 +316,38 @@ export const recipeStep = pgTable(
   (t) => [unique("recipe_step_no_uq").on(t.recipeVersionId, t.stepNo)],
 );
 
+export const recipeVideo = pgTable(
+  "recipe_video",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    ownerId: uuid("owner_id").notNull(),
+    recipeId: uuid("recipe_id")
+      .notNull()
+      .references(() => recipe.id, { onDelete: "cascade" }),
+    url: text("url").notNull(),
+    title: text("title"),
+    description: text("description"),
+    platform: text("platform", { enum: RECIPE_VIDEO_PLATFORMS }).notNull().default("other"),
+    thumbnailUrl: text("thumbnail_url"),
+    durationSec: integer("duration_sec"),
+    authorName: text("author_name"),
+    source: text("source", { enum: RECIPE_VIDEO_SOURCES }).notNull().default("manual"),
+    sortOrder: integer("sort_order").notNull().default(0),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index("recipe_video_recipe_idx").on(t.recipeId, t.sortOrder),
+    check(
+      "recipe_video_platform_check",
+      sql`${t.platform} in ('youtube','vimeo','instagram','tiktok','other')`,
+    ),
+    check("recipe_video_source_check", sql`${t.source} in ('manual','ai')`),
+    check("recipe_video_duration_check", sql`${t.durationSec} is null or ${t.durationSec} >= 0`),
+    check("recipe_video_sort_check", sql`${t.sortOrder} >= 0`),
+  ],
+);
+
 export const tag = pgTable(
   "tag",
   {
@@ -343,6 +379,8 @@ export type IngredientConversionRow = typeof ingredientConversion.$inferSelect;
 export type RecipeRow = typeof recipe.$inferSelect;
 export type RecipeVersionRow = typeof recipeVersion.$inferSelect;
 export type RecipeItemRow = typeof recipeItem.$inferSelect;
+export type RecipeStepRow = typeof recipeStep.$inferSelect;
+export type RecipeVideoRow = typeof recipeVideo.$inferSelect;
 export type CostingSnapshotRow = typeof costingSnapshot.$inferSelect;
 export type PricingScenarioRow = typeof pricingScenario.$inferSelect;
 export type AuditLogRow = typeof auditLog.$inferSelect;

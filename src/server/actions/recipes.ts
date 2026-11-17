@@ -12,8 +12,9 @@ import {
 } from "@ufc/costing";
 import { getDb, DEFAULT_OWNER_ID } from "@/server/db/client";
 import * as schema from "@/server/db/schema";
-import { recipePayloadSchema, snapshotSchema } from "@/lib/schemas";
+import { recipePayloadSchema, recipeTutorialPayloadSchema, snapshotSchema } from "@/lib/schemas";
 import { parseDecimalInput, slugify } from "@/lib/format";
+import { detectVideoPlatform, youtubeThumbnail } from "@/lib/video";
 import { calculateForRecipe } from "@/server/costing-service";
 import { getIngredients, getRecipeById, getRecipes } from "@/server/queries";
 import { fail, generateRecipeCode, logAudit, ok, parseDateInput, type ActionState } from "./shared";
@@ -296,6 +297,21 @@ export async function saveRecipeAction(_prev: ActionState, formData: FormData): 
         })),
       );
 
+      // Tutorial steps belong to a recipe version. Carry the current tutorial
+      // forward so improving the formula does not erase the production guide.
+      const previousSteps = existing?.version?.steps ?? [];
+      if (previousSteps.length > 0) {
+        await tx.insert(schema.recipeStep).values(
+          previousSteps.map((step) => ({
+            ownerId: DEFAULT_OWNER_ID,
+            recipeVersionId: versionId,
+            stepNo: step.stepNo,
+            instruction: step.instruction,
+            durationSec: step.durationSec,
+          })),
+        );
+      }
+
       await tx
         .update(schema.recipe)
         .set({ currentVersionId: versionId, updatedAt: new Date() })
@@ -490,6 +506,105 @@ export async function saveSnapshotAction(_prev: ActionState, formData: FormData)
   } catch (error) {
     if (error instanceof CostingError) return fail(error.message);
     return fail(error instanceof Error ? error.message : "Gagal menyimpan snapshot.");
+  }
+}
+
+export async function saveRecipeTutorialAction(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  const recipeId = String(formData.get("recipeId") ?? "").trim();
+  if (!recipeId) return fail("Resep tidak ditemukan.");
+
+  let raw: unknown;
+  try {
+    raw = JSON.parse(String(formData.get("payload") ?? "{}"));
+  } catch {
+    return fail("Payload tutorial tidak valid.");
+  }
+
+  const parsed = recipeTutorialPayloadSchema.safeParse(raw);
+  if (!parsed.success) {
+    return fail(
+      "Periksa kembali tutorial yang diisi.",
+      parsed.error.flatten().fieldErrors as Record<string, string>,
+    );
+  }
+
+  const { steps, videos } = parsed.data;
+
+  try {
+    const recipe = await getRecipeById(recipeId);
+    if (!recipe || !recipe.version) {
+      return fail("Resep atau versi formula aktif tidak ditemukan.");
+    }
+
+    const version = recipe.version;
+    const versionId = version.id;
+    const db = await getDb();
+
+    await db.transaction(async (tx) => {
+      await tx.delete(schema.recipeStep).where(eq(schema.recipeStep.recipeVersionId, versionId));
+
+      if (steps.length > 0) {
+        await tx.insert(schema.recipeStep).values(
+          steps.map((step, index) => ({
+            ownerId: DEFAULT_OWNER_ID,
+            recipeVersionId: versionId,
+            stepNo: index + 1,
+            instruction: step.instruction,
+            durationSec: step.durationSec ?? null,
+          })),
+        );
+      }
+
+      await tx.delete(schema.recipeVideo).where(eq(schema.recipeVideo.recipeId, recipe.id));
+
+      if (videos.length > 0) {
+        await tx.insert(schema.recipeVideo).values(
+          videos.map((video, index) => {
+            const platform = video.platform ?? detectVideoPlatform(video.url);
+            return {
+              ownerId: DEFAULT_OWNER_ID,
+              recipeId: recipe.id,
+              url: video.url,
+              title: video.title || null,
+              description: video.description || null,
+              platform,
+              thumbnailUrl: video.thumbnailUrl ?? youtubeThumbnail(video.url),
+              durationSec: video.durationSec ?? null,
+              authorName: video.authorName || null,
+              source: video.source ?? "manual",
+              sortOrder: index,
+              updatedAt: new Date(),
+            };
+          }),
+        );
+      }
+
+      await logAudit(tx, {
+        action: "recipe.tutorial.updated",
+        entityType: "recipe",
+        entityId: recipe.id,
+        summary: `Tutorial resep "${recipe.name}" v${version.versionNo} diperbarui — ${steps.length} langkah, ${videos.length} video.`,
+        metadata: {
+          recipeId: recipe.id,
+          versionId,
+          stepCount: steps.length,
+          videoCount: videos.length,
+          platforms: videos.map((video) => video.platform ?? detectVideoPlatform(video.url)),
+        },
+      });
+    });
+
+    revalidatePath("/resep");
+    revalidatePath(`/resep/${recipe.id}`);
+    revalidatePath(`/resep/${recipe.id}/tutorial`);
+    revalidatePath("/audit");
+
+    return ok(`Tutorial tersimpan: ${steps.length} langkah dan ${videos.length} video.`);
+  } catch (error) {
+    return fail(error instanceof Error ? error.message : "Gagal menyimpan tutorial.");
   }
 }
 
