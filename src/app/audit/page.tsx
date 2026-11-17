@@ -75,6 +75,7 @@ export default async function AuditPage({
         description="Jejak perubahan harga bahan, versi resep, snapshot HPP, dan pengaturan workspace. Semua record bersifat append-only untuk kebutuhan audit."
         actions={
           <form action="/audit" className="relative">
+            {params.entity ? <input type="hidden" name="entity" value={params.entity} /> : null}
             <Search className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-subtle" />
             <input
               name="q"
@@ -106,7 +107,7 @@ export default async function AuditPage({
                   className={cn(
                     "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-semibold transition-colors",
                     active
-                      ? "border-ink bg-ink text-white"
+                      ? "border-inverse bg-inverse text-inverse-ink"
                       : "border-line bg-surface text-muted hover:border-line-strong hover:text-ink",
                   )}
                 >

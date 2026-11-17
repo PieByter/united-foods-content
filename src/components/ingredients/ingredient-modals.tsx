@@ -10,6 +10,7 @@ import { createIngredientAction, updateIngredientAction, updateIngredientPriceAc
 import type { ActionState } from "@/server/actions/shared";
 import type { IngredientView } from "@/lib/types";
 import { BASE_UNIT_OPTIONS, INGREDIENT_CATEGORIES, UNIT_OPTIONS } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 import { formatCurrencyPrecise, formatDate, normalizeDecimalInput, parseDecimalInput, todayInputWIB } from "@/lib/format";
 import { Modal } from "@/components/ui/modal";
 import { Button } from "@/components/ui/button";
@@ -57,12 +58,27 @@ function NormalizationPreview({
   }, [baseUnit, purchaseQty, purchaseUnit, price, conversions]);
 
   return (
-    <div className="rounded-lg border border-emerald-line bg-emerald-soft px-3 py-2.5">
+    <div
+      className={cn(
+        "rounded-lg border px-3 py-2.5",
+        preview.error ? "border-rose-line bg-rose-soft" : "border-emerald-line bg-emerald-soft",
+      )}
+    >
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <span className="font-mono text-[8.5px] font-bold uppercase tracking-[0.14em] text-emerald">
-          Normalisasi Base Unit Terhitung
+        <span
+          className={cn(
+            "font-mono text-[8.5px] font-bold uppercase tracking-[0.14em]",
+            preview.error ? "text-rose" : "text-emerald",
+          )}
+        >
+          {preview.error ? "Normalisasi Belum Lengkap" : "Normalisasi Base Unit Terhitung"}
         </span>
-        <span className="rounded-full bg-white/70 px-1.5 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-wider text-emerald">
+        <span
+          className={cn(
+            "rounded-full bg-surface/70 px-1.5 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-wider",
+            preview.error ? "text-rose" : "text-emerald",
+          )}
+        >
           Numeric 18,6
         </span>
       </div>

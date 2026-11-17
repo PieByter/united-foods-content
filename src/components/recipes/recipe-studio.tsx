@@ -26,15 +26,28 @@ import Decimal from "decimal.js";
 import { convertQuantity, type CostedLine } from "@ufc/costing";
 import { cn } from "@/lib/utils";
 import type { IngredientView, RecipeView, RecipeVersionView, SettingsView } from "@/lib/types";
-import { formatCurrency, formatCurrencyPrecise, formatDate, formatNumber, normalizeDecimalInput, parseDecimalInput } from "@/lib/format";
+import { formatCurrency, formatCurrencyPrecise, formatDate, formatNumber, normalizeDecimalInput, parseDecimalInput, toDecimal } from "@/lib/format";
 import { calculateForRecipe } from "@/server/costing-service";
 import { Badge } from "@/components/ui/badge";
 import { Button, ButtonLink } from "@/components/ui/button";
 import { RecipeStatusBadge, RecipeThumb } from "@/components/recipe-bits";
 
 function formatFactor(value: string): string {
-  const decimal = new Decimal(parseDecimalInput(value) || "1");
-  return decimal.toDecimalPlaces(2).toFixed().replace(/\.00$/, "").replace(/(\.\d)0$/, "$1");
+  try {
+    const decimal = new Decimal(parseDecimalInput(value) || "1");
+    return decimal.toDecimalPlaces(2).toFixed().replace(/\.00$/, "").replace(/(\.\d)0$/, "$1");
+  } catch {
+    return "1";
+  }
+}
+
+function safePositiveFactor(value: string): string {
+  try {
+    const decimal = new Decimal(parseDecimalInput(value) || "1");
+    return decimal.gt(0) ? decimal.toFixed() : "1";
+  } catch {
+    return "1";
+  }
 }
 
 function practicalLabel(line: CostedLine): { main: string; extra: string | null } {
@@ -78,7 +91,8 @@ export function RecipeStudio({
   const [targetYield, setTargetYield] = useState(() => normalizeDecimalInput(version.yieldQty));
   const [showPractical, setShowPractical] = useState(true);
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
-  const normalizedFactor = parseDecimalInput(factor) || "1";
+  const normalizedFactor = useMemo(() => safePositiveFactor(factor), [factor]);
+  const targetYieldDecimal = toDecimal(parseDecimalInput(targetYield) || "0");
 
   const applyFactor = (value: string) => {
     setFactor(value);
@@ -248,7 +262,7 @@ export function RecipeStudio({
               onClick={() => setShowPractical(true)}
               className={cn(
                 "rounded-md px-2.5 py-1 text-[10px] font-semibold transition-colors",
-                showPractical ? "bg-white text-ink shadow-sm" : "text-muted hover:text-ink",
+                showPractical ? "bg-surface text-ink shadow-sm" : "text-muted hover:text-ink",
               )}
             >
               Nilai Praktis Dapur
@@ -258,7 +272,7 @@ export function RecipeStudio({
               onClick={() => setShowPractical(false)}
               className={cn(
                 "rounded-md px-2.5 py-1 text-[10px] font-semibold transition-colors",
-                !showPractical ? "bg-white text-ink shadow-sm" : "text-muted hover:text-ink",
+                !showPractical ? "bg-surface text-ink shadow-sm" : "text-muted hover:text-ink",
               )}
             >
               Nilai Eksak (Laboratorium)
@@ -279,18 +293,18 @@ export function RecipeStudio({
                     "h-8 min-w-[48px] rounded-md border px-2.5 font-mono text-[11px] font-semibold transition-colors",
                     new Decimal(normalizedFactor).eq(new Decimal(preset))
                       ? "border-amber bg-amber-soft text-copper shadow-sm"
-                      : "border-line bg-white text-ink-soft hover:border-line-strong hover:bg-surface-low",
+                      : "border-line bg-surface text-ink-soft hover:border-line-strong hover:bg-surface-low",
                   )}
                 >
                   x{preset}
                   {preset === "1" ? <span className="ml-1 text-[8px] text-subtle">(Original)</span> : null}
                 </button>
               ))}
-              <label className="flex h-8 items-center gap-1 rounded-md border border-line bg-white px-2">
+              <label className="flex h-8 items-center gap-1 rounded-md border border-line bg-surface px-2">
                 <span className="font-mono text-[10px] text-subtle">custom ×</span>
                 <input
                   value={factor}
-                  onChange={(event) => applyFactor(event.target.value)}
+                  onChange={(event) => applyFactor(event.target.value.replace(/[^\d.,]/g, ""))}
                   className="w-14 border-0 bg-transparent text-right font-mono text-[11px] font-semibold text-ink outline-none"
                   aria-label="Faktor kustom"
                 />
@@ -301,23 +315,23 @@ export function RecipeStudio({
           <div>
             <p className="mb-1.5 font-mono text-[8.5px] font-bold uppercase tracking-[0.12em] text-muted">Target Jumlah Hasil</p>
             <div className="flex items-center gap-2">
-              <div className="flex h-9 flex-1 items-center overflow-hidden rounded-md border border-line-strong bg-white">
+              <div className="flex h-9 flex-1 items-center overflow-hidden rounded-md border border-line-strong bg-surface">
                 <button
                   type="button"
-                  onClick={() => applyTarget(new Decimal(parseDecimalInput(targetYield) || "0").minus(1).toString())}
+                  onClick={() => applyTarget(targetYieldDecimal.minus(1).toString())}
                   className="h-full w-9 border-r border-line bg-surface-low text-[15px] font-bold text-ink-soft hover:bg-surface-mid"
                 >
                   −
                 </button>
                 <input
                   value={targetYield}
-                  onChange={(event) => applyTarget(event.target.value)}
+                  onChange={(event) => applyTarget(event.target.value.replace(/[^\d.,]/g, ""))}
                   className="h-full min-w-0 flex-1 border-0 bg-transparent text-center font-mono text-[15px] font-bold text-ink outline-none"
                   aria-label="Target hasil"
                 />
                 <button
                   type="button"
-                  onClick={() => applyTarget(new Decimal(parseDecimalInput(targetYield) || "0").plus(1).toString())}
+                  onClick={() => applyTarget(targetYieldDecimal.plus(1).toString())}
                   className="h-full w-9 border-l border-line bg-surface-low text-[15px] font-bold text-ink-soft hover:bg-surface-mid"
                 >
                   +
@@ -397,7 +411,7 @@ export function RecipeStudio({
                 <tbody className="divide-y divide-line/70">
                   {(result?.lines ?? []).map((line) => {
                     const item = line.itemId ? itemMap.get(line.itemId) : null;
-                    const baseQty = item ? item.qty : new Decimal(line.qty).div(factor || "1").toFixed();
+                    const baseQty = item ? item.qty : new Decimal(line.qty).div(normalizedFactor || "1").toFixed();
                     const practical = practicalLabel(line);
                     const hasChildren = Boolean(line.children?.length);
                     return (
@@ -484,7 +498,7 @@ export function RecipeStudio({
                 {result.overheadLines.map((line) => (
                   <div key={line.key} className="rounded-lg border border-line bg-surface-low/40 p-2.5">
                     <div className="flex items-center justify-between gap-1">
-                      <span className="flex h-6 w-6 items-center justify-center rounded bg-white text-copper ring-1 ring-line">
+                      <span className="flex h-6 w-6 items-center justify-center rounded bg-surface text-copper ring-1 ring-line">
                         <OverheadIcon name={line.name} />
                       </span>
                       <Badge tone={line.unit === "%" ? "blue" : "neutral"}>{line.unit === "%" ? "Percent" : "Per Batch"}</Badge>
@@ -523,7 +537,7 @@ export function RecipeStudio({
                     <span
                       className={cn(
                         "flex h-6 w-8 items-center justify-center rounded font-mono text-[9px] font-bold",
-                        entry.id === version.id ? "bg-ink text-amber-bright" : "bg-surface-low text-muted",
+                        entry.id === version.id ? "bg-navy text-amber-bright" : "bg-surface-low text-muted",
                       )}
                     >
                       v{entry.versionNo}

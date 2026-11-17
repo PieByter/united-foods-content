@@ -8,14 +8,14 @@ type Size = "xs" | "sm" | "md" | "lg" | "icon";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-ink text-white hover:bg-ink-soft shadow-[0_1px_2px_rgba(15,23,42,0.18)] disabled:bg-slate-400",
+    "bg-inverse text-inverse-ink hover:bg-inverse/90 shadow-[0_1px_2px_rgba(15,23,42,0.18)] disabled:bg-subtle",
   amber:
     "bg-amber text-white hover:bg-copper shadow-[0_1px_2px_rgba(180,83,9,0.24)] disabled:bg-amber/50",
   outline:
-    "border border-line-strong bg-white text-ink hover:border-ink/30 hover:bg-surface-low disabled:text-subtle",
+    "border border-line-strong bg-surface text-ink hover:border-ink/30 hover:bg-surface-low disabled:text-subtle",
   ghost: "text-ink-soft hover:bg-surface-low hover:text-ink disabled:text-subtle",
   soft: "bg-surface-low text-ink-soft hover:bg-surface-mid disabled:text-subtle",
-  danger: "bg-rose text-white hover:bg-rose/90 disabled:bg-rose/50",
+  danger: "bg-danger text-white hover:bg-danger/90 disabled:bg-danger/50",
   dark: "bg-navy text-white hover:bg-navy-3 disabled:bg-slate-500",
 };
 
@@ -29,7 +29,7 @@ const sizes: Record<Size, string> = {
 
 export function buttonClass(variant: Variant = "primary", size: Size = "md", className?: string) {
   return cn(
-    "inline-flex select-none items-center justify-center whitespace-nowrap font-semibold transition-colors outline-none focus-visible:ring-2 focus-visible:ring-amber/40 focus-visible:ring-offset-1 disabled:cursor-not-allowed",
+    "inline-flex select-none items-center justify-center whitespace-nowrap font-semibold transition-colors outline-none focus-visible:ring-2 focus-visible:ring-amber/40 focus-visible:ring-offset-1 focus-visible:ring-offset-surface disabled:cursor-not-allowed",
     variants[variant],
     sizes[size],
     className,

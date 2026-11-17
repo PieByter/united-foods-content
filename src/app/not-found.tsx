@@ -15,7 +15,7 @@ export default function NotFound() {
         </p>
         <Link
           href="/dashboard"
-          className="mt-4 inline-flex h-9 items-center rounded-lg bg-ink px-4 text-[12px] font-semibold text-white hover:bg-ink-soft"
+          className="mt-4 inline-flex h-9 items-center rounded-lg bg-inverse px-4 text-[12px] font-semibold text-inverse-ink hover:bg-inverse/90"
         >
           Kembali ke dashboard
         </Link>

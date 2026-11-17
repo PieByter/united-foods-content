@@ -48,7 +48,7 @@ export function RecipeCatalog({ rows }: { rows: CatalogRow[] }) {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Cari nama resep, kode formula, kategori..."
-            className="h-9 w-full rounded-md border border-line bg-surface-low/60 pl-8 pr-3 text-[11.5px] outline-none placeholder:text-subtle focus:border-amber focus:bg-white focus:ring-2 focus:ring-amber/15"
+            className="h-9 w-full rounded-md border border-line bg-surface-low/60 pl-8 pr-3 text-[11.5px] text-ink outline-none placeholder:text-subtle focus:border-amber focus:bg-surface focus:ring-2 focus:ring-amber/15"
           />
         </div>
         <div className="flex flex-wrap gap-1.5">
@@ -60,7 +60,7 @@ export function RecipeCatalog({ rows }: { rows: CatalogRow[] }) {
               className={cn(
                 "rounded-full border px-2.5 py-1 text-[10px] font-semibold transition-colors",
                 category === item
-                  ? "border-ink bg-ink text-white"
+                  ? "border-inverse bg-inverse text-inverse-ink"
                   : "border-line bg-surface-low text-muted hover:border-line-strong hover:text-ink",
               )}
             >

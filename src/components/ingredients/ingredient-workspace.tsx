@@ -182,13 +182,13 @@ export function IngredientWorkspace({
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
                   placeholder="Cari bahan, kode SKU, atau kategori (mis: Tepung, Cakra, Fermipan)..."
-                  className="h-9 w-full rounded-md border border-line bg-surface-low/60 pl-8 pr-3 text-[11.5px] text-ink outline-none placeholder:text-subtle focus:border-amber focus:bg-white focus:ring-2 focus:ring-amber/15"
+                  className="h-9 w-full rounded-md border border-line bg-surface-low/60 pl-8 pr-3 text-[11.5px] text-ink outline-none placeholder:text-subtle focus:border-amber focus:bg-surface focus:ring-2 focus:ring-amber/15"
                 />
               </div>
               <select
                 value={purchaseUnit}
                 onChange={(event) => setPurchaseUnit(event.target.value)}
-                className="h-9 rounded-md border border-line bg-white px-2.5 text-[11px] font-medium text-ink-soft outline-none focus:border-amber"
+                className="h-9 rounded-md border border-line bg-surface px-2.5 text-[11px] font-medium text-ink-soft outline-none focus:border-amber"
               >
                 <option value="all">Satuan Pembelian: Semua</option>
                 {purchaseUnits.map((unit) => (
@@ -200,7 +200,7 @@ export function IngredientWorkspace({
               <select
                 value={flag}
                 onChange={(event) => setFlag(event.target.value)}
-                className="h-9 rounded-md border border-line bg-white px-2.5 text-[11px] font-medium text-ink-soft outline-none focus:border-amber"
+                className="h-9 rounded-md border border-line bg-surface px-2.5 text-[11px] font-medium text-ink-soft outline-none focus:border-amber"
               >
                 <option value="all">Semua Atribut</option>
                 <option value="conversion">Punya konversi</option>
@@ -220,7 +220,7 @@ export function IngredientWorkspace({
                   className={cn(
                     "rounded-full border px-2.5 py-1 text-[10px] font-semibold transition-colors",
                     category === item
-                      ? "border-ink bg-ink text-white"
+                      ? "border-inverse bg-inverse text-inverse-ink"
                       : "border-line bg-surface-low text-muted hover:border-line-strong hover:text-ink",
                   )}
                 >
@@ -300,7 +300,7 @@ export function IngredientWorkspace({
                           ) : null}
                         </td>
                         <td className="px-3 py-3">
-                          <span className="inline-flex rounded border border-line bg-white px-1.5 py-0.5 font-mono text-[10px] font-semibold text-ink-soft">
+                          <span className="inline-flex rounded border border-line bg-surface px-1.5 py-0.5 font-mono text-[10px] font-semibold text-ink-soft">
                             {ingredient.baseUnit}
                           </span>
                         </td>
@@ -313,7 +313,7 @@ export function IngredientWorkspace({
                         <td className="px-3 py-3">
                           <div className="flex flex-wrap gap-1">
                             {ingredient.conversionSummary ? (
-                              <span className="inline-flex items-center gap-1 rounded border border-line bg-white px-1.5 py-0.5 font-mono text-[8.5px] text-ink-soft">
+                              <span className="inline-flex items-center gap-1 rounded border border-line bg-surface px-1.5 py-0.5 font-mono text-[8.5px] text-ink-soft">
                                 <ArrowLeftRight className="h-2.5 w-2.5 text-copper" />
                                 {ingredient.conversionSummary}
                               </span>
@@ -369,7 +369,7 @@ export function IngredientWorkspace({
                     <span
                       className={cn(
                         "inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 font-mono text-[9px] font-semibold",
-                        selected.changePct > 0 ? "bg-rose/20 text-rose-line" : "bg-emerald/20 text-emerald-line",
+                        selected.changePct > 0 ? "bg-rose/20 text-rose" : "bg-emerald/20 text-emerald",
                       )}
                     >
                       {selected.changePct > 0 ? <TrendingUp className="h-2.5 w-2.5" /> : <TrendingDown className="h-2.5 w-2.5" />}
@@ -459,9 +459,9 @@ export function IngredientWorkspace({
                       selected.conversions.map((conversion) => (
                         <div key={conversion.id} className="flex items-center justify-between rounded-md border border-line bg-surface-low/40 px-2.5 py-2">
                           <div className="flex items-center gap-2 font-mono text-[10.5px]">
-                            <span className="rounded bg-white px-1.5 py-0.5 ring-1 ring-line">{conversion.fromUnit}</span>
+                            <span className="rounded bg-surface px-1.5 py-0.5 text-ink-soft ring-1 ring-line">{conversion.fromUnit}</span>
                             <ArrowLeftRight className="h-3 w-3 text-copper" />
-                            <span className="rounded bg-white px-1.5 py-0.5 ring-1 ring-line">{conversion.toUnit}</span>
+                            <span className="rounded bg-surface px-1.5 py-0.5 text-ink-soft ring-1 ring-line">{conversion.toUnit}</span>
                           </div>
                           <span className="font-mono text-[11px] font-bold text-ink">{formatNumber(conversion.factor)}</span>
                         </div>

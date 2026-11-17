@@ -24,7 +24,7 @@ export function Label({
 }
 
 const fieldBase =
-  "w-full rounded-md border border-line-strong bg-white text-[12.5px] text-ink outline-none transition-colors placeholder:text-subtle focus:border-amber focus:ring-2 focus:ring-amber/15 disabled:bg-surface-low disabled:text-muted";
+  "w-full rounded-md border border-line-strong bg-surface text-[12.5px] text-ink outline-none transition-colors placeholder:text-subtle focus:border-amber focus:ring-2 focus:ring-amber/15 disabled:bg-surface-low disabled:text-muted";
 
 export function Input({ className, ...props }: InputHTMLAttributes<HTMLInputElement>) {
   return <input className={cn(fieldBase, "h-9 px-3", className)} {...props} />;
@@ -108,7 +108,7 @@ export function InputGroup({
   return (
     <div
       className={cn(
-        "flex h-9 items-stretch overflow-hidden rounded-md border border-line-strong bg-white transition-colors focus-within:border-amber focus-within:ring-2 focus-within:ring-amber/15",
+        "flex h-9 items-stretch overflow-hidden rounded-md border border-line-strong bg-surface transition-colors focus-within:border-amber focus-within:ring-2 focus-within:ring-amber/15",
         className,
       )}
     >

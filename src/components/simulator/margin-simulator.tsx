@@ -88,14 +88,29 @@ export function MarginSimulator({
     return Object.fromEntries(entries.map(([id, value]) => [id, { mode: "percent" as const, value }]));
   }, [overrides]);
 
-  const normalizedFactor = parseDecimalInput(factor) || "1";
-  const normalizedSellingPrice = parseDecimalInput(sellingPrice) || "0";
+  const normalizedFactor = useMemo(() => {
+    try {
+      const decimal = new Decimal(parseDecimalInput(factor) || "1");
+      return decimal.gt(0) ? decimal.toFixed() : "1";
+    } catch {
+      return "1";
+    }
+  }, [factor]);
+
+  const normalizedSellingPrice = useMemo(() => {
+    try {
+      const decimal = new Decimal(parseDecimalInput(sellingPrice) || "0");
+      return decimal.gte(0) ? decimal.toFixed() : "0";
+    } catch {
+      return "0";
+    }
+  }, [sellingPrice]);
 
   const computation = useMemo(() => {
     try {
       const baseline = calculateForRecipe(recipe, ingredients, recipes, {
         priceStrategy: strategy,
-        scaleFactor: parseDecimalInput(factor) || "1",
+        scaleFactor: normalizedFactor,
         asOf: strategy !== "latest" ? `${asOf}T23:59:59+07:00` : undefined,
       });
       const result =
@@ -103,7 +118,7 @@ export function MarginSimulator({
           ? baseline
           : calculateForRecipe(recipe, ingredients, recipes, {
               priceStrategy: strategy,
-              scaleFactor: parseDecimalInput(factor) || "1",
+              scaleFactor: normalizedFactor,
               asOf: strategy !== "latest" ? `${asOf}T23:59:59+07:00` : undefined,
               priceOverrides,
             });
@@ -115,7 +130,7 @@ export function MarginSimulator({
         error: error instanceof Error ? error.message : "Simulasi gagal dihitung.",
       };
     }
-  }, [recipe, ingredients, recipes, strategy, asOf, factor, priceOverrides]);
+  }, [recipe, ingredients, recipes, strategy, asOf, normalizedFactor, priceOverrides]);
 
   const result = computation.result;
   const baseline = computation.baseline;
@@ -260,7 +275,7 @@ export function MarginSimulator({
                   "rounded-md border px-3 py-1.5 text-left transition-colors",
                   strategy === option.key
                     ? "border-navy bg-navy text-white"
-                    : "border-line bg-white text-ink-soft hover:border-line-strong hover:bg-surface-low",
+                    : "border-line bg-surface text-ink-soft hover:border-line-strong hover:bg-surface-low",
                 )}
               >
                 <span className="block text-[10.5px] font-semibold">{option.label}</span>
@@ -274,7 +289,7 @@ export function MarginSimulator({
                 type="date"
                 value={asOf}
                 onChange={(event) => setAsOf(event.target.value)}
-                className="h-8 rounded-md border border-line bg-white px-2 font-mono text-[10px] text-ink outline-none focus:border-amber"
+                className="h-8 rounded-md border border-line bg-surface px-2 font-mono text-[10px] text-ink outline-none focus:border-amber"
               />
             ) : null}
           </div>
@@ -329,7 +344,7 @@ export function MarginSimulator({
                   onChange={(event) => setSellingPrice(event.target.value.replace(/[^\d.,]/g, ""))}
                   inputMode="decimal"
                   placeholder="10000"
-                  className="mt-1 w-full border-0 bg-transparent font-display text-[25px] font-extrabold tracking-[-0.03em] text-ink outline-none placeholder:text-slate-300 [font-variant-numeric:tabular-nums]"
+                  className="mt-1 w-full border-0 bg-transparent font-display text-[25px] font-extrabold tracking-[-0.03em] text-ink outline-none placeholder:text-subtle [font-variant-numeric:tabular-nums]"
                   aria-label="Harga jual per unit"
                 />
                 <p className="font-mono text-[8.5px] text-copper">Rp {formatNumber(normalizedSellingPrice)} / {version.yieldUnit}</p>
@@ -369,9 +384,9 @@ export function MarginSimulator({
                   onClick={() => setFactor(preset)}
                   className={cn(
                     "rounded border px-2 py-0.5 font-mono text-[9px] font-semibold",
-                    new Decimal(parseDecimalInput(factor) || "1").eq(new Decimal(preset))
+                    new Decimal(normalizedFactor).eq(new Decimal(preset))
                       ? "border-amber bg-amber-soft text-copper"
-                      : "border-line bg-white text-muted hover:text-ink",
+                      : "border-line bg-surface text-muted hover:text-ink",
                   )}
                 >
                   x{preset}
@@ -379,8 +394,8 @@ export function MarginSimulator({
               ))}
               <input
                 value={factor}
-                onChange={(event) => setFactor(event.target.value)}
-                className="h-6 w-14 rounded border border-line bg-white px-1.5 text-right font-mono text-[9px] text-ink outline-none focus:border-amber"
+                onChange={(event) => setFactor(event.target.value.replace(/[^\d.,]/g, ""))}
+                className="h-6 w-14 rounded border border-line bg-surface px-1.5 text-right font-mono text-[9px] text-ink outline-none focus:border-amber"
                 aria-label="Faktor batch"
               />
               <span className="ml-auto font-mono text-[8.5px] text-subtle">
@@ -427,7 +442,7 @@ export function MarginSimulator({
                     onClick={() => setRoundingTo(step)}
                     className={cn(
                       "rounded border px-2 py-0.5 font-mono text-[9px] font-semibold",
-                      roundingTo === step ? "border-amber bg-amber-soft text-copper" : "border-line bg-white text-muted",
+                      roundingTo === step ? "border-amber bg-amber-soft text-copper" : "border-line bg-surface text-muted",
                     )}
                   >
                     {step === "0" ? "Tanpa" : `Rp${step}`}
@@ -521,16 +536,16 @@ export function MarginSimulator({
                   </div>
                 ))}
                 <div className="flex flex-wrap gap-1.5">
-                  <button type="button" onClick={() => presetShock("tepung", 20)} className="rounded border border-line bg-white px-2 py-1 font-mono text-[9px] text-ink-soft hover:bg-amber-soft">
+                  <button type="button" onClick={() => presetShock("tepung", 20)} className="rounded border border-line bg-surface px-2 py-1 font-mono text-[9px] text-ink-soft hover:bg-amber-soft">
                     Tepung +20%
                   </button>
-                  <button type="button" onClick={() => presetShock("telur", 15)} className="rounded border border-line bg-white px-2 py-1 font-mono text-[9px] text-ink-soft hover:bg-amber-soft">
+                  <button type="button" onClick={() => presetShock("telur", 15)} className="rounded border border-line bg-surface px-2 py-1 font-mono text-[9px] text-ink-soft hover:bg-amber-soft">
                     Telur +15%
                   </button>
-                  <button type="button" onClick={() => presetShock("butter", 25)} className="rounded border border-line bg-white px-2 py-1 font-mono text-[9px] text-ink-soft hover:bg-amber-soft">
+                  <button type="button" onClick={() => presetShock("butter", 25)} className="rounded border border-line bg-surface px-2 py-1 font-mono text-[9px] text-ink-soft hover:bg-amber-soft">
                     Butter +25%
                   </button>
-                  <button type="button" onClick={() => setOverrides({})} className="inline-flex items-center gap-1 rounded border border-line bg-white px-2 py-1 font-mono text-[9px] text-muted hover:bg-surface-low">
+                  <button type="button" onClick={() => setOverrides({})} className="inline-flex items-center gap-1 rounded border border-line bg-surface px-2 py-1 font-mono text-[9px] text-muted hover:bg-surface-low">
                     <RotateCcw className="h-2.5 w-2.5" /> Reset
                   </button>
                 </div>
@@ -665,7 +680,7 @@ export function MarginSimulator({
                     id="snapshot-label"
                     name="label"
                     placeholder={`Rilis v${version.versionNo} — evaluasi margin`}
-                    className="h-8 w-full rounded border border-line bg-white px-2 text-[10.5px] outline-none focus:border-amber focus:ring-2 focus:ring-amber/15"
+                    className="h-8 w-full rounded border border-line bg-surface px-2 text-[10.5px] text-ink outline-none focus:border-amber focus:ring-2 focus:ring-amber/15"
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-2 font-mono text-[8.5px]">

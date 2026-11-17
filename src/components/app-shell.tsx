@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   Bell,
@@ -24,6 +25,7 @@ import { cn } from "@/lib/utils";
 import { initials } from "@/lib/format";
 import { APP_SHORT, APP_TAGLINE, APP_VERSION, GOV_NAV_ITEMS, NAV_ITEMS } from "@/lib/constants";
 import type { SettingsView } from "@/lib/types";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 
 const NAV_ICONS = {
   LayoutDashboard,
@@ -44,6 +46,8 @@ interface AppShellProps {
 export function AppShell({ children, settings, syncedAt }: AppShellProps) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const wasOpenRef = useRef(false);
 
   useEffect(() => {
     const handler = (event: KeyboardEvent) => {
@@ -52,6 +56,35 @@ export function AppShell({ children, settings, syncedAt }: AppShellProps) {
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, []);
+
+  // Close the drawer when the layout crosses into the desktop breakpoint.
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 1024px)");
+    const sync = () => {
+      if (media.matches) setMobileOpen(false);
+    };
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
+
+  // Lock background scrolling while the mobile drawer is open.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const original = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = original;
+    };
+  }, [mobileOpen]);
+
+  // Return focus to the trigger when the drawer is dismissed on mobile.
+  useEffect(() => {
+    if (wasOpenRef.current && !mobileOpen && window.matchMedia("(max-width: 1023px)").matches) {
+      menuButtonRef.current?.focus();
+    }
+    wasOpenRef.current = mobileOpen;
+  }, [mobileOpen]);
 
   const isActive = (href: string) => {
     if (href === "/simulator") return pathname === "/simulator" || pathname.endsWith("/simulator");
@@ -74,12 +107,17 @@ export function AppShell({ children, settings, syncedAt }: AppShellProps) {
       ) : null}
 
       <aside
+        id="app-sidebar"
+        aria-label="Navigasi utama"
         className={cn(
           "no-print fixed inset-y-0 left-0 z-50 flex w-[268px] flex-col bg-navy text-slate-300 transition-transform duration-200 lg:sticky lg:top-0 lg:h-dvh lg:translate-x-0",
-          mobileOpen ? "translate-x-0" : "-translate-x-full",
+          mobileOpen ? "translate-x-0 max-lg:visible" : "-translate-x-full max-lg:invisible",
         )}
       >
-        <div className="flex items-center gap-3 border-b border-white/10 px-5 py-[18px]">
+        <div
+          className="flex items-center gap-3 border-b border-white/10 px-5 py-[18px]"
+          style={{ paddingTop: "max(18px, env(safe-area-inset-top))" }}
+        >
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-gradient-to-br from-amber-bright to-amber text-[13px] font-extrabold tracking-tight text-navy shadow-[0_6px_16px_-8px_rgba(245,158,11,0.8)]">
             UFC
           </div>
@@ -106,7 +144,7 @@ export function AppShell({ children, settings, syncedAt }: AppShellProps) {
           </div>
         </div>
 
-        <nav className="scrollbar-slim mt-5 flex-1 overflow-y-auto px-3 pb-4">
+        <nav className="scrollbar-slim mt-5 min-h-0 flex-1 overflow-y-auto overscroll-contain px-3 pb-4">
           <p className="px-2 pb-2 text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">Modul Operasional</p>
           <div className="space-y-1">
             {NAV_ITEMS.map((item) => {
@@ -117,6 +155,7 @@ export function AppShell({ children, settings, syncedAt }: AppShellProps) {
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
+                  aria-current={active ? "page" : undefined}
                   className={cn(
                     "group relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-[13px] font-medium transition-colors",
                     active
@@ -146,6 +185,7 @@ export function AppShell({ children, settings, syncedAt }: AppShellProps) {
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
+                  aria-current={active ? "page" : undefined}
                   className={cn(
                     "group relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-[13px] font-medium transition-colors",
                     active
@@ -174,7 +214,10 @@ export function AppShell({ children, settings, syncedAt }: AppShellProps) {
           </div>
         </nav>
 
-        <div className="border-t border-white/10 p-4">
+        <div
+          className="border-t border-white/10 p-4"
+          style={{ paddingBottom: "max(16px, env(safe-area-inset-bottom))" }}
+        >
           <div className="flex items-center justify-between rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2.5">
             <div className="flex items-center gap-2">
               <span className="relative flex h-2 w-2">
@@ -195,13 +238,19 @@ export function AppShell({ children, settings, syncedAt }: AppShellProps) {
       </aside>
 
       <div className="flex min-h-dvh min-w-0 flex-col">
-        <header className="no-print sticky top-0 z-30 border-b border-line bg-surface/95 backdrop-blur supports-[backdrop-filter]:bg-surface/85">
+        <header
+          className="no-print sticky top-0 z-30 border-b border-line bg-surface/95 backdrop-blur supports-[backdrop-filter]:bg-surface/85"
+          style={{ paddingTop: "env(safe-area-inset-top)" }}
+        >
           <div className="flex h-[62px] items-center gap-3 px-4 lg:px-7">
             <button
+              ref={menuButtonRef}
               type="button"
               onClick={() => setMobileOpen(true)}
               className="rounded-md p-2 text-ink-soft hover:bg-surface-low lg:hidden"
               aria-label="Buka menu"
+              aria-expanded={mobileOpen}
+              aria-controls="app-sidebar"
             >
               <Menu className="h-5 w-5" />
             </button>
@@ -212,9 +261,9 @@ export function AppShell({ children, settings, syncedAt }: AppShellProps) {
                 name="q"
                 type="search"
                 placeholder="Cari formula resep, SKU bahan baku, atau kode batch..."
-                className="h-9 w-full rounded-lg border border-line bg-surface-low/70 pl-9 pr-20 text-[12.5px] text-ink outline-none transition-colors placeholder:text-subtle focus:border-amber/60 focus:bg-white focus:ring-2 focus:ring-amber/15"
+                className="h-9 w-full rounded-lg border border-line bg-surface-low/70 pl-9 pr-3 text-[12.5px] text-ink outline-none transition-colors placeholder:text-subtle focus:border-amber/60 focus:bg-surface focus:ring-2 focus:ring-amber/15 lg:pr-20"
               />
-              <span className="pointer-events-none absolute right-2 top-1/2 hidden -translate-y-1/2 items-center gap-1 rounded border border-line bg-white px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-subtle lg:flex">
+              <span className="pointer-events-none absolute right-2 top-1/2 hidden -translate-y-1/2 items-center gap-1 rounded border border-line bg-surface px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-subtle lg:flex">
                 <Sparkles className="h-2.5 w-2.5" /> Cari
               </span>
             </form>
@@ -232,13 +281,15 @@ export function AppShell({ children, settings, syncedAt }: AppShellProps) {
                 aria-label="Notifikasi"
               >
                 <Bell className="h-[18px] w-[18px]" />
-                <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-rose ring-2 ring-white" />
+                <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-rose ring-2 ring-surface" />
               </button>
+
+              <ThemeToggle />
 
               <div className="hidden h-7 w-px bg-line sm:block" />
 
               <div className="flex items-center gap-2.5">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-navy-3 to-navy text-[11px] font-bold text-amber-bright ring-2 ring-white">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-navy-3 to-navy text-[11px] font-bold text-amber-bright ring-2 ring-surface">
                   {initials(settings.ownerName)}
                 </div>
                 <div className="hidden leading-tight sm:block">
@@ -252,7 +303,10 @@ export function AppShell({ children, settings, syncedAt }: AppShellProps) {
 
         <main className="mx-auto w-full max-w-[1580px] flex-1 px-4 py-6 lg:px-7 lg:py-7">{children}</main>
 
-        <footer className="no-print mx-auto flex w-full max-w-[1580px] flex-wrap items-center justify-between gap-2 px-4 pb-5 text-[10px] text-subtle lg:px-7">
+        <footer
+          className="no-print mx-auto flex w-full max-w-[1580px] flex-wrap items-center justify-between gap-2 px-4 pb-5 text-[10px] text-subtle lg:px-7"
+          style={{ paddingBottom: "max(20px, env(safe-area-inset-bottom))" }}
+        >
           <span className="font-mono uppercase tracking-[0.12em]">
             {APP_SHORT} · {APP_TAGLINE} · {settings.workspaceName}
           </span>

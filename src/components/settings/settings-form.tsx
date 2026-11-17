@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useMemo } from "react";
+import { useActionState, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Save } from "lucide-react";
@@ -17,6 +17,8 @@ const initialState: ActionState = {};
 
 export function SettingsForm({ settings }: { settings: SettingsView }) {
   const [state, action, pending] = useActionState(updateSettingsAction, initialState);
+  const [targetFoodCost, setTargetFoodCost] = useState(settings.targetFoodCostPct);
+  const [targetMargin, setTargetMargin] = useState(settings.targetMarginPct);
   const router = useRouter();
 
   useEffect(() => {
@@ -32,8 +34,8 @@ export function SettingsForm({ settings }: { settings: SettingsView }) {
 
   const example = useMemo(() => {
     try {
-      const margin = Number(settings.targetMarginPct || 70);
-      const foodCost = Number(settings.targetFoodCostPct || 30);
+      const margin = Number(targetMargin || 70);
+      const foodCost = Number(targetFoodCost || 30);
       return {
         marginPrice: suggestSellingPrice({ costPerUnit: 2600, targetMarginPct: margin, roundingTo: 500 }),
         foodCostPrice: suggestSellingPrice({ costPerUnit: 2600, targetFoodCostPct: foodCost, roundingTo: 500 }),
@@ -41,7 +43,7 @@ export function SettingsForm({ settings }: { settings: SettingsView }) {
     } catch {
       return { marginPrice: "—", foodCostPrice: "—" };
     }
-  }, [settings.targetMarginPct, settings.targetFoodCostPct]);
+  }, [targetMargin, targetFoodCost]);
 
   return (
     <form action={action} className="space-y-3">
@@ -86,19 +88,29 @@ export function SettingsForm({ settings }: { settings: SettingsView }) {
             </Select>
           </Field>
           <Field label="Target Food Cost Portofolio (%)" htmlFor="targetFoodCostPct" error={errors.targetFoodCostPct}>
-            <NumberInput id="targetFoodCostPct" name="targetFoodCostPct" defaultValue={settings.targetFoodCostPct} />
+            <NumberInput
+              id="targetFoodCostPct"
+              name="targetFoodCostPct"
+              value={targetFoodCost}
+              onChange={(event) => setTargetFoodCost(event.target.value)}
+            />
           </Field>
           <Field label="Target Gross Margin (%)" htmlFor="targetMarginPct" error={errors.targetMarginPct}>
-            <NumberInput id="targetMarginPct" name="targetMarginPct" defaultValue={settings.targetMarginPct} />
+            <NumberInput
+              id="targetMarginPct"
+              name="targetMarginPct"
+              value={targetMargin}
+              onChange={(event) => setTargetMargin(event.target.value)}
+            />
           </Field>
           <div className="flex items-end">
             <div className="w-full rounded-md border border-line bg-surface-low/50 px-3 py-2 text-[9.5px] leading-relaxed text-muted">
               <p className="font-semibold text-ink">Contoh pada HPP Rp2.600/roti</p>
               <p className="mt-0.5">
-                Margin {settings.targetMarginPct}% → <span className="font-mono font-semibold text-copper">{formatCurrency(example.marginPrice)}</span>
+                Margin {targetMargin}% → <span className="font-mono font-semibold text-copper">{formatCurrency(example.marginPrice)}</span>
               </p>
               <p>
-                Food cost {settings.targetFoodCostPct}% → <span className="font-mono font-semibold text-copper">{formatCurrency(example.foodCostPrice)}</span>
+                Food cost {targetFoodCost}% → <span className="font-mono font-semibold text-copper">{formatCurrency(example.foodCostPrice)}</span>
               </p>
             </div>
           </div>

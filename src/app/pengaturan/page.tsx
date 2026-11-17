@@ -1,10 +1,11 @@
-import { AlertTriangle, BookMarked, Database, Download, FileUp, Globe2, Layers, ShieldCheck } from "lucide-react";
+import { AlertTriangle, BookMarked, Database, Download, FileUp, Globe2, Layers, Palette, ShieldCheck } from "lucide-react";
 import { getSettings } from "@/server/queries";
 import { PageHeader } from "@/components/ui/page-header";
 import { ButtonLink } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SettingsForm } from "@/components/settings/settings-form";
 import { SeedDemoButton } from "@/components/seed-demo-button";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { APP_NAME, APP_SHORT, APP_TAGLINE, APP_VERSION } from "@/lib/constants";
 
 export const metadata = { title: "Pengaturan" };
@@ -30,6 +31,16 @@ export default async function SettingsPage() {
         </div>
 
         <aside className="space-y-3 xl:col-span-4">
+          <div className="rounded-xl border border-line bg-surface p-4 shadow-card">
+            <h2 className="flex items-center gap-2 font-display text-[13.5px] font-bold text-ink">
+              <Palette className="h-4 w-4 text-copper" /> Preferensi Tampilan
+            </h2>
+            <p className="mt-1 text-[10px] leading-relaxed text-muted">
+              Pilih mode terang atau gelap. Preferensi disimpan di perangkat ini dan diterapkan sebelum halaman dirender.
+            </p>
+            <ThemeToggle withLabel className="mt-2 w-full justify-start border-line bg-surface-low" />
+          </div>
+
           <div className="rounded-xl border border-line bg-surface p-4 shadow-card">
             <h2 className="flex items-center gap-2 font-display text-[13.5px] font-bold text-ink">
               <Layers className="h-4 w-4 text-copper" /> Content System Fase 2

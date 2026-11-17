@@ -25,7 +25,7 @@ import { buildPriceBook, toDomainIngredient, toDomainRecipe } from "@/lib/costin
 import { saveRecipeAction } from "@/server/actions/recipes";
 import type { ActionState } from "@/server/actions/shared";
 import { RECIPE_CATEGORIES, UNIT_OPTIONS } from "@/lib/constants";
-import { formatCurrency, formatNumber, normalizeDecimalInput, parseDecimalInput } from "@/lib/format";
+import { formatCurrency, formatNumber, normalizeDecimalInput, parseDecimalInput, toDecimal } from "@/lib/format";
 import { PageHeader } from "@/components/ui/page-header";
 import { Button } from "@/components/ui/button";
 import { Field, Input, NumberInput, Select, Textarea, FormSection } from "@/components/ui/form";
@@ -251,6 +251,15 @@ export function RecipeForm({
     }
   }, [recipe, name, category, status, isSubrecipe, yieldQty, yieldUnit, unitWeightG, yieldLossPct, items, recipes, ingredients]);
 
+  // Empty rows added via the "Bahan / Sub-resep / Overhead" buttons should
+  // not block saving. Only send rows that are actually usable, matching the
+  // same predicate the live preview uses.
+  const payloadItems = items.filter((item) =>
+    item.type === "overhead"
+      ? Boolean(item.label.trim()) && Boolean(item.overheadValue.trim())
+      : Boolean(item.refId) && Number(parseDecimalInput(item.qty)) > 0,
+  );
+
   const payload = {
     id: recipe?.id,
     name,
@@ -263,10 +272,11 @@ export function RecipeForm({
     unitWeightG: unitWeightG || null,
     yieldLossPct: yieldLossPct || "0",
     notes: notes || null,
-    items: items.map(toPayloadItem),
+    items: payloadItems.map(toPayloadItem),
   };
 
   const errors = state.fieldErrors ?? {};
+  const yieldLossDecimal = toDecimal(parseDecimalInput(yieldLossPct) || "0");
   const effectiveYield = useMemo(() => {
     try {
       return new Decimal(parseDecimalInput(yieldQty) || "0").mul(
@@ -295,7 +305,7 @@ export function RecipeForm({
           <>
             <Link
               href={recipe ? `/resep/${recipe.id}` : "/resep"}
-              className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-line-strong bg-white px-3.5 text-[12px] font-semibold text-ink hover:bg-surface-low"
+              className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-line-strong bg-surface px-3.5 text-[12px] font-semibold text-ink hover:bg-surface-low"
             >
               <ArrowLeft className="h-3.5 w-3.5" /> Batal
             </Link>
@@ -427,7 +437,7 @@ export function RecipeForm({
                     const subrecipe = item.type === "subrecipe" ? subrecipeMap.get(item.refId) : undefined;
                     const units = item.type === "ingredient" ? unitsForIngredient(ingredient) : unitLabelFor(item.unit) ? [item.unit] : ["gr"];
                     return (
-                      <div key={item.key} className="rounded-lg border border-line bg-white p-2.5">
+                      <div key={item.key} className="rounded-lg border border-line bg-surface p-2.5">
                         <div className="flex items-center justify-between gap-2">
                           <div className="flex items-center gap-2">
                             <span
@@ -543,7 +553,7 @@ export function RecipeForm({
                                 <select
                                   value={item.rounding}
                                   onChange={(event) => updateItem(item.key, { rounding: event.target.value as FormItem["rounding"] })}
-                                  className="rounded border border-line bg-white px-1 py-0.5 font-mono text-[9px]"
+                                  className="rounded border border-line bg-surface px-1 py-0.5 font-mono text-[9px] text-ink"
                                 >
                                   <option value="none">none</option>
                                   <option value="half">half</option>
@@ -565,7 +575,7 @@ export function RecipeForm({
                             value={item.note}
                             onChange={(event) => updateItem(item.key, { note: event.target.value })}
                             placeholder="Catatan (opsional)"
-                            className="ml-auto h-6 max-w-[240px] flex-1 rounded border border-transparent bg-surface-low px-1.5 text-[9.5px] text-ink outline-none focus:border-amber focus:bg-white"
+                            className="ml-auto h-6 max-w-[240px] flex-1 rounded border border-transparent bg-surface-low px-1.5 text-[9.5px] text-ink outline-none focus:border-amber focus:bg-surface"
                           />
                         </div>
                       </div>
@@ -607,7 +617,7 @@ export function RecipeForm({
             <div className="flex gap-2">
               <Link
                 href={recipe ? `/resep/${recipe.id}` : "/resep"}
-                className="inline-flex h-9 items-center rounded-lg border border-line-strong bg-white px-3.5 text-[12px] font-semibold text-ink hover:bg-surface-low"
+                className="inline-flex h-9 items-center rounded-lg border border-line-strong bg-surface px-3.5 text-[12px] font-semibold text-ink hover:bg-surface-low"
               >
                 Batal
               </Link>
@@ -668,7 +678,7 @@ export function RecipeForm({
               <ChecklistItem ok={Boolean(name.trim())} label="Nama resep terisi" />
               <ChecklistItem ok={Number(parseDecimalInput(yieldQty)) > 0} label="Yield batch valid" />
               <ChecklistItem ok={items.some((item) => item.type !== "overhead" && item.refId)} label="Minimal satu bahan / sub-resep" />
-              <ChecklistItem ok={new Decimal(parseDecimalInput(yieldLossPct) || "0").gte(0) && new Decimal(parseDecimalInput(yieldLossPct) || "0").lt(100)} label="Yield loss 0–99,99%" />
+              <ChecklistItem ok={yieldLossDecimal.gte(0) && yieldLossDecimal.lt(100)} label="Yield loss 0–99,99%" />
               <ChecklistItem ok={!preview.error} label="Preview HPP dapat dihitung" />
             </ul>
           </div>
@@ -697,7 +707,7 @@ function MetricLine({ label, value, accent }: { label: string; value: string; ac
 function ChecklistItem({ ok, label }: { ok: boolean; label: string }) {
   return (
     <li className="flex items-center gap-1.5">
-      <span className={cn("flex h-3.5 w-3.5 items-center justify-center rounded-full text-[8px] font-bold text-white", ok ? "bg-emerald" : "bg-slate-300")}>
+      <span className={cn("flex h-3.5 w-3.5 items-center justify-center rounded-full text-[8px] font-bold", ok ? "bg-emerald text-inverse-ink" : "bg-surface-mid text-muted ring-1 ring-line-strong")}>
         {ok ? "✓" : "!"}
       </span>
       <span className={ok ? "text-ink-soft" : "text-muted"}>{label}</span>

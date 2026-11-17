@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
-import { Toaster } from "sonner";
 import { getSettings } from "@/server/queries";
 import { formatDateTimeShort } from "@/lib/format";
 import { AppShell } from "@/components/app-shell";
+import { ThemedToaster } from "@/components/theme/themed-toaster";
 import "./globals.css";
 
 export const dynamic = "force-dynamic";
@@ -58,22 +58,19 @@ export default async function RootLayout({
 
   return (
     <html lang="id" data-scroll-behavior="smooth" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              '(function(){try{var k="ufc-theme",s=localStorage.getItem(k),m=window.matchMedia("(prefers-color-scheme: dark)").matches,d=s==="dark"||(s!=="light"&&m),r=document.documentElement;r.classList.toggle("dark",d);r.dataset.theme=d?"dark":"light";r.style.colorScheme=d?"dark":"light"}catch(e){}})()',
+          }}
+        />
+      </head>
       <body suppressHydrationWarning className={`${inter.variable} ${jakarta.variable} ${jetbrains.variable} min-h-dvh font-sans`}>
         <AppShell settings={settings} syncedAt={syncedAt}>
           {children}
         </AppShell>
-        <Toaster
-          position="top-center"
-          richColors
-          toastOptions={{
-            style: {
-              fontFamily: "var(--font-inter)",
-              fontSize: "13px",
-              borderRadius: "8px",
-              border: "1px solid #e2e8f0",
-            },
-          }}
-        />
+        <ThemedToaster />
       </body>
     </html>
   );
