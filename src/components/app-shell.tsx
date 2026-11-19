@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -118,8 +119,15 @@ export function AppShell({ children, settings, syncedAt }: AppShellProps) {
           className="flex items-center gap-3 border-b border-white/10 px-5 py-[18px]"
           style={{ paddingTop: "max(18px, env(safe-area-inset-top))" }}
         >
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-gradient-to-br from-amber-bright to-amber text-[13px] font-extrabold tracking-tight text-navy shadow-[0_6px_16px_-8px_rgba(245,158,11,0.8)]">
-            UFC
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-[10px] bg-white shadow-[0_6px_16px_-8px_rgba(0,0,0,0.6)]">
+            <Image
+              src="/icon-192.png"
+              alt=""
+              width={40}
+              height={40}
+              priority
+              className="h-full w-full object-contain"
+            />
           </div>
           <div className="min-w-0">
             <p className="font-display text-[15px] font-bold leading-tight text-white">United Foods</p>
